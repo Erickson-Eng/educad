@@ -14,6 +14,6 @@ public class UserServicePostgresql implements UserService {
     private UserRepository userRepository;
     @Override
     public void registerUser(RegisterForm registerForm) {
-
+        // TODO document why this method is empty
     }
 }

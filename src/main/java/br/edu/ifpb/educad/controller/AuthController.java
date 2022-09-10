@@ -29,7 +29,7 @@ public class AuthController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<?> auth(@RequestBody @Valid LoginForm loginForm){
+    public ResponseEntity<TokenResponse> auth(@RequestBody @Valid LoginForm loginForm){
         UsernamePasswordAuthenticationToken login = loginForm.usernameAndPasswordToToken();
         try {
             Authentication authentication = authenticationManager.authenticate(login);

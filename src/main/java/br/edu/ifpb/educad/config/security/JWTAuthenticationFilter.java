@@ -1,6 +1,5 @@
 package br.edu.ifpb.educad.config.security;
 
-import br.edu.ifpb.educad.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
-    public static final int TOKEN_EXPIRATION_DATE = 600_000;
-    public static final String TOKEN_PASSWORD = "463408a1-54c9-4307-bb1c-6cced559f5a7";
 
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
@@ -38,7 +34,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     user.getAuthorities()
             ));
         } catch (IOException e) {
-            throw new RuntimeException("Falha ao autenticar", e);
+            throw new RuntimeException("Falha ao autenticar", e); // criar exception personalizada
         }
     }
 
