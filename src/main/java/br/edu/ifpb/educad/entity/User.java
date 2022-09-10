@@ -8,7 +8,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -22,9 +21,10 @@ public class User implements Serializable {
     private static final long serialVersionUID = 3954873306310267070L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq")
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private Long id;
     @Column(unique = true)
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -48,8 +48,5 @@ public class User implements Serializable {
         this.cellphone = cellphone;
     }
 
-    public UUID getId() {
-        return id;
-    }
 
 }

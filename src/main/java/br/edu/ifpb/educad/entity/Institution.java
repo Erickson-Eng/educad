@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -22,7 +21,7 @@ public class Institution implements Serializable {
     @SequenceGenerator(name = "institution_seq")
     @Column(name = "id", nullable = false)
     private Long id;
-//    private UUID id;
+
     private String name;
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.PERSIST})
     private Address address;
