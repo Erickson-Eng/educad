@@ -67,8 +67,10 @@ public class StudentServicePostgresql implements StudentService {
     }
 
     protected List<Student> verifyIfExist(String fullName){
-        return studentRepository.findAllByFullNameContainingIgnoreCase(fullName)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
+        // return studentRepository.findAllByFullNameContainingIgnoreCase(fullName)
+        //         .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
+
+        return null;
     }
 
     protected void updateData(Student student, StudentRequest request){
