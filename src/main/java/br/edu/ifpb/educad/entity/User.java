@@ -47,6 +47,4 @@ public class User implements Serializable {
         this.email = email;
         this.cellphone = cellphone;
     }
-
-
 }
