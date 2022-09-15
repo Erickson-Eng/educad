@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable {
     private static final long serialVersionUID = 3954873306310267070L;
 

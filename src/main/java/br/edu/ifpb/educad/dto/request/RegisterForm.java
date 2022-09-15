@@ -5,9 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Builder
 @Data
@@ -16,12 +15,10 @@ import javax.validation.constraints.NotBlank;
 public class RegisterForm {
 
     @NotBlank
-    @Min(5)
-    @Max(30)
+    @Size(min = 5, max = 30)
     private String username;
     @NotBlank
-    @Min(8)
-    @Max(12)
+    @Size(min = 8, max = 12)
     private String password;
     @NotBlank
     private String email;
