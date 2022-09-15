@@ -19,7 +19,7 @@ public class UserServicePostgresql implements UserService {
 
     @Override
     public UserResponse registerUser(RegisterForm registerForm) {
-        User user = getUser(registerForm);
+        User user = userMapper.userRequestToEntity(registerForm);
 
         try {
             userRepository.save(user);
@@ -27,14 +27,8 @@ public class UserServicePostgresql implements UserService {
             throw new DataIntegrityViolationException(e.getMessage());
         }
 
-        return getUserResponse(user);
-    }
+        UserResponse userResponse = userMapper.entityToUserResponse(user);
 
-    protected User getUser(RegisterForm registerForm) {
-        return userMapper.userRequestToEntity(registerForm);
-    }
-
-    protected UserResponse getUserResponse(User user) {
-        return userMapper.entityToUserResponse(user);
+        return userResponse;
     }
 }

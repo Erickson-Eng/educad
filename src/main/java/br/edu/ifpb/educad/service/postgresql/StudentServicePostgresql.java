@@ -85,5 +85,5 @@ public class StudentServicePostgresql implements StudentService {
                 .map(studentMapper::entityToStudentResponse)
                 .collect(Collectors.toList());
     }
-    
+
 }
