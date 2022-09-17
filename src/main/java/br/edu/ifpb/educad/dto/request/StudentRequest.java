@@ -30,7 +30,7 @@ public class StudentRequest {
     private String course;
     @NotBlank
     private String period;
-    @NotBlank
+    @NotNull
     private LocalDate entryDate;
 
 }

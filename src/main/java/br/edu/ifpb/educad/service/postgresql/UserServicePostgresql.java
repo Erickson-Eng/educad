@@ -27,8 +27,6 @@ public class UserServicePostgresql implements UserService {
             throw new DataIntegrityViolationException(e.getMessage());
         }
 
-        UserResponse userResponse = userMapper.entityToUserResponse(user);
-
-        return userResponse;
+        return userMapper.entityToUserResponse(user);
     }
 }

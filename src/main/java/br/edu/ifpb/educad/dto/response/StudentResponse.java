@@ -27,5 +27,4 @@ public class StudentResponse {
     private Long userId;
     private AddressResponse addressResponse;
 
-
 }
