@@ -5,7 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Map;
 
-@Builder
+// A anotação @Builder causa erro com o MapStruct
+// @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
