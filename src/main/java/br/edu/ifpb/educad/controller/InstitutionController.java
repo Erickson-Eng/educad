@@ -2,7 +2,6 @@ package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.dto.request.InstitutionRequest;
 import br.edu.ifpb.educad.dto.response.InstitutionResponse;
-import br.edu.ifpb.educad.dto.response.StudentResponse;
 import br.edu.ifpb.educad.dto.response.table.InstitutionResponseTable;
 import br.edu.ifpb.educad.service.InstitutionService;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +37,7 @@ public class InstitutionController {
     })
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public InstitutionResponse updateAddress(@PathVariable Long id,
+    public InstitutionResponse updateInstitution(@PathVariable Long id,
                                          @RequestBody @Valid InstitutionRequest institutionRequest) {
         return institutionService.update(id, institutionRequest);
     }
@@ -66,7 +65,7 @@ public class InstitutionController {
 
     @ApiOperation(value = "Find institutions by name in the database")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "ok", response = StudentResponse.class)
+            @ApiResponse(code = 200, message = "ok", response = InstitutionResponse.class)
     })
     @GetMapping("/find-by-name/{name}")
     @ResponseStatus(HttpStatus.OK)

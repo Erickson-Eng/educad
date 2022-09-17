@@ -54,7 +54,7 @@ public class StudentController {
         return studentService.delete(id);
     }
 
-    @ApiOperation(value = "Find a student in the database")
+    @ApiOperation(value = "Find a student by ID in the database")
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = StudentResponse.class)
     })
@@ -64,7 +64,7 @@ public class StudentController {
         return studentService.getStudentById(id);
     }
 
-    @ApiOperation(value = "Find a student in the database")
+    @ApiOperation(value = "Find a student by name in the database")
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = StudentResponse.class)
     })

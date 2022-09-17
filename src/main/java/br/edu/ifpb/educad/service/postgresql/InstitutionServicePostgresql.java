@@ -23,7 +23,7 @@ public class InstitutionServicePostgresql implements InstitutionService {
 
     @Override
     public InstitutionResponse save(InstitutionRequest institutionRequest) {
-        Institution institution = getInstitution(institutionRequest);
+        Institution institution = institutionMapper.institutionRequestToEntity(institutionRequest);
 
         try {
             institutionRepository.save(institution);
@@ -31,7 +31,7 @@ public class InstitutionServicePostgresql implements InstitutionService {
             throw new DataIntegrityViolationException(e.getMessage());
         }
 
-        return getInstitutionResponse(institution);
+        return institutionMapper.entityToInstitutionResponse(institution);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class InstitutionServicePostgresql implements InstitutionService {
 
         institutionRepository.save(institution);
 
-        return getInstitutionResponse(institution);
+        return institutionMapper.entityToInstitutionResponse(institution);
     }
 
     @Override
@@ -54,14 +54,14 @@ public class InstitutionServicePostgresql implements InstitutionService {
 
         institutionRepository.delete(institution);
 
-        return getInstitutionResponse(institution);
+        return institutionMapper.entityToInstitutionResponse(institution);
     }
 
     @Override
     public InstitutionResponse getInstitutionById(Long id) {
         Institution institution = verifyIfExist(id);
 
-        return getInstitutionResponse(institution);
+        return institutionMapper.entityToInstitutionResponse(institution);
     }
 
     @Override
@@ -78,13 +78,5 @@ public class InstitutionServicePostgresql implements InstitutionService {
 
     protected void updateData(Institution institution, InstitutionRequest institutionRequest) {
         institution.setName(institutionRequest.getName());
-    }
-
-    protected Institution getInstitution(InstitutionRequest institutionRequest) {
-        return institutionMapper.institutionRequestToEntity(institutionRequest);
-    }
-
-    protected InstitutionResponse getInstitutionResponse(Institution institution) {
-        return institutionMapper.entityToInstitutionResponse(institution);
     }
 }
