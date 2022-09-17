@@ -1,7 +1,7 @@
 package br.edu.ifpb.educad.dto.mapper;
 
 import br.edu.ifpb.educad.dto.request.RegisterForm;
-import br.edu.ifpb.educad.dto.response.table.UserResponse;
+import br.edu.ifpb.educad.dto.response.UserResponse;
 import br.edu.ifpb.educad.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -2,7 +2,7 @@ package br.edu.ifpb.educad.service.postgresql;
 
 import br.edu.ifpb.educad.dto.mapper.UserMapper;
 import br.edu.ifpb.educad.dto.request.RegisterForm;
-import br.edu.ifpb.educad.dto.response.table.UserResponse;
+import br.edu.ifpb.educad.dto.response.UserResponse;
 import br.edu.ifpb.educad.entity.User;
 import br.edu.ifpb.educad.repository.UserRepository;
 import br.edu.ifpb.educad.service.UserService;

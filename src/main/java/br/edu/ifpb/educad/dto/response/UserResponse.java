@@ -1,4 +1,4 @@
-package br.edu.ifpb.educad.dto.response.table;
+package br.edu.ifpb.educad.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
