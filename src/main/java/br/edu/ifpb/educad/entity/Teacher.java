@@ -3,6 +3,7 @@ package br.edu.ifpb.educad.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Map;
 
 // A anotação @Builder causa erro com o MapStruct
@@ -24,5 +25,4 @@ public class Teacher extends Profile {
     @MapKey(name = "registration")
     @ToString.Exclude
     private Map<String, Discipline> disciplineMap;
-
 }

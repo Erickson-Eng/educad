@@ -13,12 +13,20 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/teacher")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class TeacherController {
     private TeacherService teacherService;
+
+    @ApiOperation(value = "List all teachers in the database")
+    @GetMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<TeacherResponse> list() {
+        return teacherService.list();
+    }
 
     @ApiOperation(value = "Create a new teacher in the database")
     @ApiResponses({
@@ -45,6 +53,7 @@ public class TeacherController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = TeacherResponse.class)
     })
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public TeacherResponse deleteTeacher(@PathVariable Long id) {

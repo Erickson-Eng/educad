@@ -38,4 +38,12 @@ public class Address implements Serializable {
     @LastModifiedDate
     private LocalDate modifiedDate;
 
+    public Address(String street, String complement, String number, String city, String state, String zipCode) {
+        this.street = street;
+        this.complement = complement;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
 }
