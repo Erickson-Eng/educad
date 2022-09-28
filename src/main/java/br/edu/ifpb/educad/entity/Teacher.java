@@ -25,4 +25,9 @@ public class Teacher extends Profile {
     @MapKey(name = "registration")
     @ToString.Exclude
     private Map<String, Discipline> disciplineMap;
+
+    public Teacher(Long id, String fullName, LocalDate birthDate, String cpf, User user, Address address, LocalDate createdDate, LocalDate modifiedDate, Map<String, Discipline> disciplineMap) {
+        super(id, fullName, birthDate, cpf, user, address, createdDate, modifiedDate);
+        this.disciplineMap = disciplineMap;
+    }
 }

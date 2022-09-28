@@ -11,17 +11,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class TeacherServicePostgresql implements TeacherService {
     private TeacherRepository teacherRepository;
+
     private TeacherMapper teacherMapper;
 
     @Override
     public List<TeacherResponse> list() {
-        return null;
+        List<TeacherResponse> result = new ArrayList<>();
+        List<Teacher> teachers = teacherRepository.findAll();
+
+        for (Teacher teacher: teachers) {
+            result.add(teacherMapper.entityToTeacherResponse(teacher));
+        }
+
+        return result;
     }
 
     @Override

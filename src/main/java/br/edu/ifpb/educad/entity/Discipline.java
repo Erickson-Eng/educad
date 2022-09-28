@@ -38,5 +38,4 @@ public class Discipline implements Serializable {
     @LastModifiedDate
     private LocalDate modifiedDate;
 
-
 }
