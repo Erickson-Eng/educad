@@ -23,6 +23,7 @@ public class TeacherController {
 
     @ApiOperation(value = "List all teachers in the database")
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<TeacherResponse> list() {
         return teacherService.list();
     }

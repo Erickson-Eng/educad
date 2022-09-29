@@ -20,14 +20,14 @@ public class TeacherRequest{
     private LocalDate birthDate;
 
     @NotBlank
-    @CPF
+    // @CPF(message = "CPF inválido") Validação falhando para mesmo para o padrão 123.123.123-15
     private String cpf;
 
     @NotNull
     private Long userId;
 
     @NotNull
-    private AddressRequest addressRequest;
+    private Long addressId;
 
     private String value;
 

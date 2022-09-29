@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,14 +24,9 @@ public class TeacherServicePostgresql implements TeacherService {
 
     @Override
     public List<TeacherResponse> list() {
-        List<TeacherResponse> result = new ArrayList<>();
         List<Teacher> teachers = teacherRepository.findAll();
 
-        for (Teacher teacher: teachers) {
-            result.add(teacherMapper.entityToTeacherResponse(teacher));
-        }
-
-        return result;
+        return teachers.stream().map(teacher -> teacherMapper.entityToTeacherResponse(teacher)).collect(Collectors.toList());
     }
 
     @Override
