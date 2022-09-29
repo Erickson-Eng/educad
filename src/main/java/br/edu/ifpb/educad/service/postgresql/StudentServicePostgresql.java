@@ -22,7 +22,6 @@ public class StudentServicePostgresql implements StudentService {
     private StudentRepository studentRepository;
     private StudentMapper studentMapper;
 
-
     @Override
     public StudentResponse save(StudentRequest studentRequest) {
         Student student = studentMapper.studentRequestToEntity(studentRequest);

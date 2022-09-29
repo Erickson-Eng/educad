@@ -16,20 +16,28 @@ public class StudentRequest {
 
     @NotBlank
     private String fullName;
+
     private LocalDate birthDate;
+
     @NotBlank
     @CPF
     private String cpf;
+
     @NotNull
     private Long userId;
+
     @NotNull
     private AddressRequest address;
+
     @NotBlank
     private String matriculation;
+
     @NotBlank
     private String course;
+
     @NotBlank
     private String period;
+
     @NotNull
     private LocalDate entryDate;
 

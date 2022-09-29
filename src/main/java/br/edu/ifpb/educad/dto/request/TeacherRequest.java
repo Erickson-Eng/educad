@@ -27,7 +27,7 @@ public class TeacherRequest{
     private Long userId;
 
     @NotNull
-    private Long addressId;
+    private AddressRequest address;
 
     private String value;
 

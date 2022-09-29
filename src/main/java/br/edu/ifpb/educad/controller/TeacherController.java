@@ -53,7 +53,6 @@ public class TeacherController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = TeacherResponse.class)
     })
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public TeacherResponse deleteTeacher(@PathVariable Long id) {
