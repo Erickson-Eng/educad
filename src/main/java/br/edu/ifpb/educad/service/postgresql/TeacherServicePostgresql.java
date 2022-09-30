@@ -26,7 +26,6 @@ public class TeacherServicePostgresql implements TeacherService {
     @Override
     public List<TeacherResponse> list() {
         List<Teacher> teachers = teacherRepository.findAll();
-
         return teachers.stream().map(teacher -> teacherMapper.entityToTeacherResponse(teacher)).collect(Collectors.toList());
     }
 

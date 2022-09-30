@@ -23,9 +23,15 @@ public class StudentServicePostgresql implements StudentService {
     private StudentMapper studentMapper;
 
     @Override
+    public List<StudentResponse> list() {
+        List<Student> students = studentRepository.findAll();
+        return students.stream().map(student -> studentMapper.entityToStudentResponse(student)).collect(Collectors.toList());
+    }
+
+    @Override
     public StudentResponse save(StudentRequest studentRequest) {
         Student student = studentMapper.studentRequestToEntity(studentRequest);
-        try{
+        try {
             studentRepository.save(student);
         } catch (RuntimeException e){
             throw new DataIntegrityViolationException(e.getMessage());
