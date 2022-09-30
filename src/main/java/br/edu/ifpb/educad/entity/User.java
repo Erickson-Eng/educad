@@ -20,17 +20,30 @@ import java.time.LocalDate;
 public class User implements Serializable {
     private static final long serialVersionUID = 3954873306310267070L;
 
+    public User(String username, String password, String email, String cellphone) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.cellphone = cellphone;
+        this.createdDate = LocalDate.now();
+        this.modifiedDate = LocalDate.now();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @SequenceGenerator(name = "user_seq")
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Column(unique = true)
     private String username;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
     @Column(unique = true)
     private String email;
+
     private String cellphone;
 
     @Column(name = "created_date", updatable = false)
@@ -41,10 +54,4 @@ public class User implements Serializable {
     @LastModifiedDate
     private LocalDate modifiedDate;
 
-    public User(String username, String password, String email, String cellphone) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.cellphone = cellphone;
-    }
 }

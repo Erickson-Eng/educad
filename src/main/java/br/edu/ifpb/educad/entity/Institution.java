@@ -19,12 +19,12 @@ import java.util.Set;
 public class Institution implements Serializable {
     private static final long serialVersionUID = -207392191958171304L;
 
-    public Institution(String name, Address address, Set<Course> courses, LocalDate createdDate, LocalDate modifiedDate) {
+    public Institution(String name, Address address, Set<Course> courses) {
         this.name = name;
         this.address = address;
         this.courses = courses;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = LocalDate.now();
+        this.modifiedDate = LocalDate.now();
     }
 
     @Id

@@ -19,11 +19,11 @@ import java.time.LocalDate;
 public class Course implements Serializable {
     private static final long serialVersionUID = -1358145327397413208L;
 
-    public Course(String name, Institution institution, LocalDate createdDate, LocalDate modifiedDate) {
+    public Course(String name, Institution institution) {
         this.name = name;
         this.institution = institution;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = LocalDate.now();
+        this.modifiedDate = LocalDate.now();
     }
 
     @Id

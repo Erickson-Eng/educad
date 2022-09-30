@@ -19,15 +19,16 @@ public class Teacher extends Profile {
     private static final long serialVersionUID = 5112183181912923264L;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "teach_discipline_mapping",
-            joinColumns = {@JoinColumn(name = "teacher_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "discipline_id", referencedColumnName = "id")})
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+//    @JoinTable(name = "teach_discipline_mapping",
+//            joinColumns = {@JoinColumn(name = "teacher_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "discipline_id", referencedColumnName = "id")})
     @MapKey(name = "registration")
     @ToString.Exclude
     private Map<String, Discipline> disciplineMap;
 
-    public Teacher(Long id, String fullName, LocalDate birthDate, String cpf, User user, Address address, LocalDate createdDate, LocalDate modifiedDate, Map<String, Discipline> disciplineMap) {
-        super(id, fullName, birthDate, cpf, user, address, createdDate, modifiedDate);
+    public Teacher(String fullName, LocalDate birthDate, String cpf, User user, Address address, Map<String, Discipline> disciplineMap) {
+        super(fullName, birthDate, cpf, user, address);
         this.disciplineMap = disciplineMap;
     }
 }
