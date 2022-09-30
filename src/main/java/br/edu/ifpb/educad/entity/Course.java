@@ -18,6 +18,14 @@ import java.time.LocalDate;
 @Table(name = "course")
 public class Course implements Serializable {
     private static final long serialVersionUID = -1358145327397413208L;
+
+    public Course(String name, Institution institution, LocalDate createdDate, LocalDate modifiedDate) {
+        this.name = name;
+        this.institution = institution;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_seq")
     @SequenceGenerator(name = "course_seq")
@@ -35,7 +43,6 @@ public class Course implements Serializable {
     @Column(name = "modified_date")
     @LastModifiedDate
     private LocalDate modifiedDate;
-
 
     public Long getId() {
         return id;
