@@ -13,5 +13,6 @@ public interface StudentMapper {
     Student studentRequestToEntity(StudentRequest studentRequest);
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "address", target = "addressResponse")
     StudentResponse entityToStudentResponse(Student student);
 }
