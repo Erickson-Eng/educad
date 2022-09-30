@@ -68,7 +68,7 @@ public class StudentController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = StudentResponse.class)
     })
-    @GetMapping("/find-by-name/{name}")
+    @GetMapping("/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public StudentResponseTable findStudentByName(@PathVariable String name){
         StudentResponseTable studentResponseTable = new StudentResponseTable();
