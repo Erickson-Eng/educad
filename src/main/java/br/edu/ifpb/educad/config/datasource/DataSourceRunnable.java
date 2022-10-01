@@ -9,23 +9,19 @@ import org.springframework.context.annotation.Profile;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Stream;
 
 @Configuration
 @Profile("test")
 public class DataSourceRunnable implements CommandLineRunner {
 
     @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
     private TeacherRepository teacherRepository;
-
-    @Autowired
-    private DisciplineRepository disciplineRepository;
 
     @Autowired
     private InstitutionRepository institutionRepository;
@@ -35,7 +31,44 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         this.seedInstitution();
         this.seedTeacher();
+        this.seedStudent();
 
+    }
+
+    private void seedStudent() {
+        User userMaria = new User("maria_alves", "789poi", "maria_alves@gmail.com", "87911118225");
+        userRepository.save(userMaria);
+
+        Address avenidaDutra = new Address("Avenida Dutra", "Apto", "456", "Recife", "Pernambuco", "458889999", LocalDate.now(), LocalDate.now());
+
+        Student studentMaria = new Student("Maria Alves",
+                LocalDate.of(1990, 1, 1),
+                "12863305432",
+                userMaria,
+                avenidaDutra,
+                "123456789",
+                "Administração",
+                "8",
+                LocalDate.now());
+
+        studentRepository.save(studentMaria);
+
+        User userCarlos = new User("carlos_peixoto", "asdf456", "carlos_peixoto@gmail.com", "87912228225");
+        userRepository.save(userCarlos);
+
+        Address ruaCoqueiros = new Address("Rua dos Coqueiros", "Apto", "65", "João Pessoa", "Praíba", "458669999", LocalDate.now(), LocalDate.now());
+
+        Student studentCarlos = new Student("Carlos Peixoto",
+                LocalDate.of(1990, 1, 1),
+                "92863305222",
+                userCarlos,
+                ruaCoqueiros,
+                "9955111454",
+                "Engenharia Civil",
+                "5",
+                LocalDate.now());
+
+        studentRepository.save(studentCarlos);
     }
 
     private void seedTeacher() {
@@ -43,7 +76,7 @@ public class DataSourceRunnable implements CommandLineRunner {
         User userJoao = new User("joao_silva", "123abc", "joao@gmail.com", "87991178225");
         userRepository.save(userJoao);
 
-        Address ruaNascimento = new Address("Rua Nascimento", "Casa", "78945612", "Rio de Janeiro", "Rio de Janeiro", "123456987");
+        Address ruaNascimento = new Address("Rua Nascimento", "Casa", "78945612", "Rio de Janeiro", "Rio de Janeiro", "123456987", LocalDate.now(), LocalDate.now());
 
         Map<String, Discipline> disciplinesJoao = new HashMap<>();
 
@@ -82,7 +115,7 @@ public class DataSourceRunnable implements CommandLineRunner {
         User userRenata = new User("renata_costa", "321asdf", "renata_costa@gmail.com", "87999978225");
         userRepository.save(userRenata);
 
-        Address ruaAurora = new Address("Rua da Aurora", "Casa", "9995554", "Recife", "Pernambuco", "456989999");
+        Address ruaAurora = new Address("Rua da Aurora", "Casa", "9995554", "Recife", "Pernambuco", "456989999", LocalDate.now(), LocalDate.now());
 
         Map<String, Discipline> disciplinesRenata = new HashMap<>();
 
@@ -114,7 +147,7 @@ public class DataSourceRunnable implements CommandLineRunner {
         User userPedro = new User("pedro_goncalves", "asdfqwerasdf", "pedro_goncalves@gmail.com", "87991148790");
         userRepository.save(userPedro);
 
-        Address ruaPeixoto = new Address("Rua Peixoto", "Apto", "78788754", "Rio de Janeiro", "Amazônio", "1116699");
+        Address ruaPeixoto = new Address("Rua Peixoto", "Apto", "78788754", "Rio de Janeiro", "Amazônio", "1116699", LocalDate.now(), LocalDate.now());
 
         Map<String, Discipline> disciplinePedro = new HashMap<>();
 
@@ -157,7 +190,7 @@ public class DataSourceRunnable implements CommandLineRunner {
         Course computacaoIfpb = new Course("Engenharia de Computação", null);
         HashSet<Course> coursesIfpb = new HashSet<>(Arrays.asList(administracaoIfpb, agroecologiaIfpb, computacaoIfpb));
 
-        Address ruaTranquilino = new Address("R. Tranquilino Coelho Lemos", "Prédio", "91051209", "Campina Grande", "Paraíba", "40506090");
+        Address ruaTranquilino = new Address("R. Tranquilino Coelho Lemos", "Prédio", "91051209", "Campina Grande", "Paraíba", "40506090", LocalDate.now(), LocalDate.now());
         Institution ifpb = new Institution("IFPB", ruaTranquilino, coursesIfpb);
 
         Course odontologia = new Course("Odontologia", null);
@@ -165,7 +198,7 @@ public class DataSourceRunnable implements CommandLineRunner {
         Course cienciaUfcg = new Course("Ciência da Computação", null);
         HashSet<Course> coursesUfcg = new HashSet<>(Arrays.asList(odontologia, nutricao, cienciaUfcg));
 
-        Address ruaGoncalo = new Address("Rua Gonçalo de Carvalho", "Casa", "123456987", "Porto Alegre", "Rio Grande do Sul", "123753951");
+        Address ruaGoncalo = new Address("Rua Gonçalo de Carvalho", "Casa", "123456987", "Porto Alegre", "Rio Grande do Sul", "123753951", LocalDate.now(), LocalDate.now());
         Institution ufcg = new Institution("UFCG", ruaGoncalo, coursesUfcg);
 
         Course fisicaUninassau = new Course("Física", null);
@@ -173,7 +206,7 @@ public class DataSourceRunnable implements CommandLineRunner {
         Course farmaciaUninassau = new Course("Farmácia", null);
         HashSet<Course> coursesUninassau = new HashSet<>(Arrays.asList(fisicaUninassau, letrasUninassau, farmaciaUninassau));
 
-        Address ruaPedras = new Address("Rua das Pedras", "Apto", "369852147", "Búzios", "Rio de Janeiro", "789951741");
+        Address ruaPedras = new Address("Rua das Pedras", "Apto", "369852147", "Búzios", "Rio de Janeiro", "789951741", LocalDate.now(), LocalDate.now());
         Institution uninassau = new Institution("UNINASSAU", ruaPedras, coursesUninassau);
 
         Course contabeisUepb = new Course("Ciências Contábeis", null);
@@ -181,7 +214,7 @@ public class DataSourceRunnable implements CommandLineRunner {
         Course enfermagemUepb = new Course("Enfermagem", null);
         HashSet<Course> coursesUepb = new HashSet<>(Arrays.asList(contabeisUepb, civilUepb, enfermagemUepb));
 
-        Address avenidaPeixoto = new Address("Av. Mal. Floriano Peixoto", "Prédio", "147852365", "Campina Grande", "Paríba", "123456965");
+        Address avenidaPeixoto = new Address("Av. Mal. Floriano Peixoto", "Prédio", "147852365", "Campina Grande", "Paríba", "123456965", LocalDate.now(), LocalDate.now());
         Institution uepb = new Institution("UEPB", avenidaPeixoto, coursesUepb);
 
         institutionRepository.saveAll(Arrays.asList(ifpb, ufcg, uninassau, uepb));
