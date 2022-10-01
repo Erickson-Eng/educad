@@ -185,33 +185,33 @@ public class DataSourceRunnable implements CommandLineRunner {
     }
 
     private void seedInstitution() {
-        Course administracaoIfpb = new Course("Administração", null);
-        Course agroecologiaIfpb = new Course("Agroecologia", null);
-        Course computacaoIfpb = new Course("Engenharia de Computação", null);
+        Course administracaoIfpb = new Course("Administração", null, LocalDate.now(), LocalDate.now());
+        Course agroecologiaIfpb = new Course("Agroecologia", null, LocalDate.now(), LocalDate.now());
+        Course computacaoIfpb = new Course("Engenharia de Computação", null, LocalDate.now(), LocalDate.now());
         HashSet<Course> coursesIfpb = new HashSet<>(Arrays.asList(administracaoIfpb, agroecologiaIfpb, computacaoIfpb));
 
         Address ruaTranquilino = new Address("R. Tranquilino Coelho Lemos", "Prédio", "91051209", "Campina Grande", "Paraíba", "40506090", LocalDate.now(), LocalDate.now());
         Institution ifpb = new Institution("IFPB", ruaTranquilino, coursesIfpb);
 
-        Course odontologia = new Course("Odontologia", null);
-        Course nutricao = new Course("Nutrição", null);
-        Course cienciaUfcg = new Course("Ciência da Computação", null);
+        Course odontologia = new Course("Odontologia", null, LocalDate.now(), LocalDate.now());
+        Course nutricao = new Course("Nutrição", null, LocalDate.now(), LocalDate.now());
+        Course cienciaUfcg = new Course("Ciência da Computação", null, LocalDate.now(), LocalDate.now());
         HashSet<Course> coursesUfcg = new HashSet<>(Arrays.asList(odontologia, nutricao, cienciaUfcg));
 
         Address ruaGoncalo = new Address("Rua Gonçalo de Carvalho", "Casa", "123456987", "Porto Alegre", "Rio Grande do Sul", "123753951", LocalDate.now(), LocalDate.now());
         Institution ufcg = new Institution("UFCG", ruaGoncalo, coursesUfcg);
 
-        Course fisicaUninassau = new Course("Física", null);
-        Course letrasUninassau = new Course("Letras", null);
-        Course farmaciaUninassau = new Course("Farmácia", null);
+        Course fisicaUninassau = new Course("Física", null, LocalDate.now(), LocalDate.now());
+        Course letrasUninassau = new Course("Letras", null, LocalDate.now(), LocalDate.now());
+        Course farmaciaUninassau = new Course("Farmácia", null, LocalDate.now(), LocalDate.now());
         HashSet<Course> coursesUninassau = new HashSet<>(Arrays.asList(fisicaUninassau, letrasUninassau, farmaciaUninassau));
 
         Address ruaPedras = new Address("Rua das Pedras", "Apto", "369852147", "Búzios", "Rio de Janeiro", "789951741", LocalDate.now(), LocalDate.now());
         Institution uninassau = new Institution("UNINASSAU", ruaPedras, coursesUninassau);
 
-        Course contabeisUepb = new Course("Ciências Contábeis", null);
-        Course civilUepb = new Course("Engenharia Civil", null);
-        Course enfermagemUepb = new Course("Enfermagem", null);
+        Course contabeisUepb = new Course("Ciências Contábeis", null, LocalDate.now(), LocalDate.now());
+        Course civilUepb = new Course("Engenharia Civil", null, LocalDate.now(), LocalDate.now());
+        Course enfermagemUepb = new Course("Enfermagem", null, LocalDate.now(), LocalDate.now());
         HashSet<Course> coursesUepb = new HashSet<>(Arrays.asList(contabeisUepb, civilUepb, enfermagemUepb));
 
         Address avenidaPeixoto = new Address("Av. Mal. Floriano Peixoto", "Prédio", "147852365", "Campina Grande", "Paríba", "123456965", LocalDate.now(), LocalDate.now());

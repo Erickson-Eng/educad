@@ -20,7 +20,7 @@ public class StudentRequest {
     private LocalDate birthDate;
 
     @NotBlank
-//    @CPF
+    @CPF(message = "CPF inválido")
     private String cpf;
 
     @NotNull
