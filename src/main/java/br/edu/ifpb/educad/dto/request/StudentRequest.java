@@ -27,7 +27,7 @@ public class StudentRequest {
     private Long userId;
 
     @NotNull
-    private AddressRequest address;
+    private AddressRequest addressRequest;
 
     @NotBlank
     private String matriculation;

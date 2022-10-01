@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 // A anotação @Builder causa erro com o MapStruct
- @Builder
+//@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,9 +20,6 @@ public class Teacher extends Profile {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
-//    @JoinTable(name = "teach_discipline_mapping",
-//            joinColumns = {@JoinColumn(name = "teacher_id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "discipline_id", referencedColumnName = "id")})
     @MapKey(name = "registration")
     @ToString.Exclude
     private Map<String, Discipline> disciplineMap;

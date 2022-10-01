@@ -14,5 +14,5 @@ public class InstitutionRequest {
     @NotBlank
     private String name;
     @NotNull
-    private AddressRequest address;
+    private AddressRequest addressRequest;
 }
