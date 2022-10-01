@@ -12,5 +12,6 @@ public interface TeacherMapper {
     Teacher teacherRequestToEntity(TeacherRequest teacherRequest);
 
     @Mapping(target = "userId", source = "user.id")
+    @Mapping(target = "addressResponse", source = "address")
     TeacherResponse entityToTeacherResponse(Teacher teacher);
 }

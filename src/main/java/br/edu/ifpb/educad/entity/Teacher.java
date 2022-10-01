@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 // A anotação @Builder causa erro com o MapStruct
-// @Builder
+ @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
