@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {AddressMapper.class})
 public interface TeacherMapper {
     @Mapping(target = "user.id", source = "userId")
+    @Mapping(target = "address", source = "addressRequest")
     Teacher teacherRequestToEntity(TeacherRequest teacherRequest);
 
     @Mapping(target = "userId", source = "user.id")

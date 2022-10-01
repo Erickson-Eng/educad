@@ -20,7 +20,7 @@ public class StudentRequest {
     private LocalDate birthDate;
 
     @NotBlank
-    @CPF
+//    @CPF
     private String cpf;
 
     @NotNull

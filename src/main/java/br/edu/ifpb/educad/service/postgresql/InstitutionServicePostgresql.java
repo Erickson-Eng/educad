@@ -41,7 +41,7 @@ public class InstitutionServicePostgresql implements InstitutionService {
         Long addressId = institution.getAddress().getId();
 
         updateData(institution, institutionRequest);
-        addressServicePostgresql.update(addressId, institutionRequest.getAddress());
+        addressServicePostgresql.update(addressId, institutionRequest.getAddressRequest());
 
         institutionRepository.save(institution);
 

@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface StudentMapper {
 
     @Mapping(target = "user.id", source = "userId")
+    @Mapping(target = "address", source = "addressRequest")
     Student studentRequestToEntity(StudentRequest studentRequest);
 
     @Mapping(source = "user.id", target = "userId")
