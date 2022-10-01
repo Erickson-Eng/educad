@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface StudentService {
 
+    List<StudentResponse> list();
+
     StudentResponse save(StudentRequest studentRequest);
 
     StudentResponse update(Long id, StudentRequest studentRequest);

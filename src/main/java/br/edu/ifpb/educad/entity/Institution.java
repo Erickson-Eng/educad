@@ -19,6 +19,14 @@ import java.util.Set;
 public class Institution implements Serializable {
     private static final long serialVersionUID = -207392191958171304L;
 
+    public Institution(String name, Address address, Set<Course> courses) {
+        this.name = name;
+        this.address = address;
+        this.courses = courses;
+        this.createdDate = LocalDate.now();
+        this.modifiedDate = LocalDate.now();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "institution_seq")
     @SequenceGenerator(name = "institution_seq")
@@ -26,10 +34,12 @@ public class Institution implements Serializable {
     private Long id;
 
     private String name;
+
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.PERSIST})
     private Address address;
 
-    @OneToMany(mappedBy = "institution")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "institution_id", referencedColumnName = "id")
     private Set<Course> courses;
 
     @Column(name = "created_date", updatable = false)

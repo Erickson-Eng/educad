@@ -18,6 +18,18 @@ import java.time.LocalDate;
 @Table(name = "address")
 public class Address implements Serializable {
     private static final long serialVersionUID = 247703941687283315L;
+
+    public Address(String street, String complement, String number, String city, String state, String zipCode, LocalDate createdDate, LocalDate modifiedDate) {
+        this.street = street;
+        this.complement = complement;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
     @SequenceGenerator(name = "address_seq")
