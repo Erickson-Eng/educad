@@ -21,6 +21,7 @@ public class TeacherServicePostgresql implements TeacherService {
     private TeacherRepository teacherRepository;
 
     private TeacherMapper teacherMapper;
+    private AddressServicePostgresql addressServicePostgresql;
 
     @Override
     public List<TeacherResponse> list() {
@@ -42,8 +43,14 @@ public class TeacherServicePostgresql implements TeacherService {
     @Override
     public TeacherResponse update(Long id, TeacherRequest teacherRequest) {
         Teacher teacher = verifyIfExists(id);
+
+        Long addressId = teacher.getAddress().getId();
+
         updateData(teacher, teacherRequest);
+        addressServicePostgresql.update(addressId, teacherRequest.getAddressRequest());
+
         teacherRepository.save(teacher);
+
         return teacherMapper.entityToTeacherResponse(teacher);
     }
 
@@ -56,7 +63,8 @@ public class TeacherServicePostgresql implements TeacherService {
 
     @Override
     public TeacherResponse getTeacherById(Long id) {
-        return null;
+        Teacher teacher = verifyIfExists(id);
+        return teacherMapper.entityToTeacherResponse(teacher);
     }
 
     protected Teacher verifyIfExists(Long id) {
