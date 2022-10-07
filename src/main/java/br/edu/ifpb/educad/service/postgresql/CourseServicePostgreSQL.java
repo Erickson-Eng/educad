@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class CourseSevicePostgresql implements CourseService {
+public class CourseServicePostgreSQL implements CourseService {
 
     private CourseMapper courseMapper;
     private CourseRepository courseRepository;
@@ -39,6 +39,11 @@ public class CourseSevicePostgresql implements CourseService {
         } catch (RuntimeException e) {
             throw new DataIntegrityViolationException("Unable to save address");
         }
+    }
+
+    @Override
+    public CourseResponse update(Long id, CourseRequest courseRequest) {
+        return null;
     }
 
 }
