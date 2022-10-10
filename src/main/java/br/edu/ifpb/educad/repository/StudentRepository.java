@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    // @Query("select s from Student s where upper(s.fullName) = concat('%', upper(:fullname), '%' ) ")
-    // Optional<List<Student>> findAllByFullNameContainingIgnoreCase(String fullName);
+    // Ainda debater a query exata a se fazer
+    @Query("SELECT s FROM Student s WHERE UPPER(s.fullName) LIKE CONCAT('%', UPPER(:fullName), '%')")
+    Optional<List<Student>> findAllByFullNameContainingIgnoreCase(String fullName);
+
 }
