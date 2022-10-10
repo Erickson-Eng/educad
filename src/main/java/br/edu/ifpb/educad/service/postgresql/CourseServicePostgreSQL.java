@@ -53,6 +53,13 @@ public class CourseServicePostgreSQL implements CourseService {
         return courseMapper.entityToCourseResponse(course);
     }
 
+    @Override
+    public CourseResponse getCourseById(Long id) {
+        Course course = verifyIfExist(id);
+
+        return courseMapper.entityToCourseResponse(course);
+    }
+
     protected Course verifyIfExist(Long id) {
         return courseRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String.format("ID: %s || Não foi encontrado nenhuma entidade para o id fornecido", id))

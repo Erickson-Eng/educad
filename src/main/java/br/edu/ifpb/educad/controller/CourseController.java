@@ -49,4 +49,14 @@ public class CourseController {
         return courseService.update(id, courseRequest);
     }
 
+    @ApiOperation(value = "Find a course by ID in the database")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "ok", response = CourseResponse.class)
+    })
+    @GetMapping("/find-by-id/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CourseResponse findCourseById(@PathVariable Long id) {
+        return courseService.getCourseById(id);
+    }
+
 }
