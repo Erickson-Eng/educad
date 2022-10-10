@@ -6,6 +6,7 @@ import br.edu.ifpb.educad.dto.response.CourseResponse;
 import br.edu.ifpb.educad.entity.Course;
 import br.edu.ifpb.educad.repository.CourseRepository;
 import br.edu.ifpb.educad.service.CourseService;
+import br.edu.ifpb.educad.service.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -43,7 +44,23 @@ public class CourseServicePostgreSQL implements CourseService {
 
     @Override
     public CourseResponse update(Long id, CourseRequest courseRequest) {
-        return null;
+        Course course = verifyIfExist(id);
+
+        updateData(course, courseRequest);
+
+        courseRepository.save(course);
+
+        return courseMapper.entityToCourseResponse(course);
+    }
+
+    protected Course verifyIfExist(Long id) {
+        return courseRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("ID: %s || Não foi encontrado nenhuma entidade para o id fornecido", id))
+        );
+    }
+
+    protected void updateData(Course course, CourseRequest courseRequest) {
+        course.setName(courseRequest.getName());
     }
 
 }

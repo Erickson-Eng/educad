@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(source = "institutionId", target = "institution.id")
     Course courseRequestToEntity(CourseRequest courseRequest);
 
     @Mapping(source = "institution.name", target = "institutionName")

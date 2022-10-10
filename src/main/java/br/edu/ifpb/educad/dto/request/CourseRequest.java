@@ -3,6 +3,7 @@ package br.edu.ifpb.educad.dto.request;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @Getter
@@ -10,6 +11,9 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CourseRequest {
+
+    @NotNull
+    private Long institutionId;
 
     @NotBlank
     private String name;

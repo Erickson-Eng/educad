@@ -11,4 +11,6 @@ public interface CourseService {
 
     CourseResponse save(CourseRequest courseRequest);
 
+    CourseResponse update(Long id, CourseRequest courseRequest);
+
 }

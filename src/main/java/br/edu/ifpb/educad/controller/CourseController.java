@@ -2,7 +2,6 @@ package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.dto.request.CourseRequest;
 import br.edu.ifpb.educad.dto.response.CourseResponse;
-import br.edu.ifpb.educad.dto.response.TeacherResponse;
 import br.edu.ifpb.educad.service.CourseService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -38,6 +37,16 @@ public class CourseController {
     @ResponseStatus(HttpStatus.CREATED)
     public CourseResponse createCourse(@RequestBody @Valid CourseRequest courseRequest) {
         return courseService.save(courseRequest);
+    }
+
+    @ApiOperation(value = "Update a course in the database")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "ok", response = CourseResponse.class)
+    })
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CourseResponse updateCourse(@PathVariable Long id, @RequestBody @Valid CourseRequest courseRequest) {
+        return courseService.update(id, courseRequest);
     }
 
 }
