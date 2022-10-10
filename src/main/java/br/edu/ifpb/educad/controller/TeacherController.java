@@ -2,6 +2,7 @@ package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.dto.request.TeacherRequest;
 import br.edu.ifpb.educad.dto.response.TeacherResponse;
+import br.edu.ifpb.educad.dto.response.table.TeacherResponseTable;
 import br.edu.ifpb.educad.service.TeacherService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -69,5 +70,16 @@ public class TeacherController {
         return teacherService.getTeacherById(id);
     }
 
-    // findTeacherByName
+    @ApiOperation(value = "Find a teacher by name in the database")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "ok", response = TeacherResponse.class)
+    })
+    @GetMapping("/name/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public TeacherResponseTable findTeacherByName(@PathVariable String name) {
+        TeacherResponseTable teacherResponseTable = new TeacherResponseTable();
+        teacherResponseTable.setTeacherResponseList(teacherService.getTeacherByName(name));
+
+        return teacherResponseTable;
+    }
 }
