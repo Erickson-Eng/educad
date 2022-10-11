@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -47,6 +48,17 @@ public class CourseController {
     @ResponseStatus(HttpStatus.OK)
     public CourseResponse updateCourse(@PathVariable Long id, @RequestBody @Valid CourseRequest courseRequest) {
         return courseService.update(id, courseRequest);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @ApiOperation(value = "Delete a course from the database")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "ok", response = CourseResponse.class)
+    })
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CourseResponse deleteCourse(@PathVariable Long id) {
+        return courseService.delete(id);
     }
 
     @ApiOperation(value = "Find a course by ID in the database")

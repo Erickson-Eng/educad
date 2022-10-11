@@ -44,7 +44,7 @@ public class CourseServicePostgreSQL implements CourseService {
 
     @Override
     public CourseResponse update(Long id, CourseRequest courseRequest) {
-        Course course = verifyIfExist(id);
+        Course course = verifyIfExists(id);
 
         updateData(course, courseRequest);
 
@@ -54,13 +54,22 @@ public class CourseServicePostgreSQL implements CourseService {
     }
 
     @Override
+    public CourseResponse delete(Long id) {
+        Course course = verifyIfExists(id);
+        
+        courseRepository.delete(course);
+        
+        return courseMapper.entityToCourseResponse(course);
+    }
+
+    @Override
     public CourseResponse getCourseById(Long id) {
-        Course course = verifyIfExist(id);
+        Course course = verifyIfExists(id);
 
         return courseMapper.entityToCourseResponse(course);
     }
 
-    protected Course verifyIfExist(Long id) {
+    protected Course verifyIfExists(Long id) {
         return courseRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String.format("ID: %s || Não foi encontrado nenhuma entidade para o id fornecido", id))
         );
