@@ -2,6 +2,7 @@ package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.dto.request.StudentRequest;
 import br.edu.ifpb.educad.dto.response.StudentResponse;
+import br.edu.ifpb.educad.dto.response.TeacherResponse;
 import br.edu.ifpb.educad.dto.response.table.StudentResponseTable;
 import br.edu.ifpb.educad.service.StudentService;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/student")
@@ -21,6 +23,13 @@ import javax.validation.Valid;
 public class StudentController {
 
     private StudentService studentService;
+
+    @ApiOperation(value = "List all students in the database")
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<StudentResponse> list() {
+        return studentService.list();
+    }
 
     @ApiOperation(value = "Create a new student in the database")
     @ApiResponses({
@@ -54,7 +63,7 @@ public class StudentController {
         return studentService.delete(id);
     }
 
-    @ApiOperation(value = "Find a student in the database")
+    @ApiOperation(value = "Find a student by ID in the database")
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = StudentResponse.class)
     })
@@ -64,11 +73,11 @@ public class StudentController {
         return studentService.getStudentById(id);
     }
 
-    @ApiOperation(value = "Find a student in the database")
+    @ApiOperation(value = "Find a student by name in the database")
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = StudentResponse.class)
     })
-    @GetMapping("/find-by-name/{name}")
+    @GetMapping("/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public StudentResponseTable findStudentByName(@PathVariable String name){
         StudentResponseTable studentResponseTable = new StudentResponseTable();

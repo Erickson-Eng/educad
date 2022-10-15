@@ -16,21 +16,29 @@ public class StudentRequest {
 
     @NotBlank
     private String fullName;
+
     private LocalDate birthDate;
+
     @NotBlank
-    @CPF
+    @CPF(message = "CPF inválido")
     private String cpf;
+
     @NotNull
     private Long userId;
+
     @NotNull
     private AddressRequest addressRequest;
+
     @NotBlank
     private String matriculation;
+
     @NotBlank
     private String course;
+
     @NotBlank
     private String period;
-    @NotBlank
+
+    @NotNull
     private LocalDate entryDate;
 
 }

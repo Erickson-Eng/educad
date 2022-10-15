@@ -1,5 +1,6 @@
 package br.edu.ifpb.educad.controller;
 
+import br.edu.ifpb.educad.dto.response.UserResponse;
 import br.edu.ifpb.educad.service.UserService;
 import br.edu.ifpb.educad.dto.request.RegisterForm;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,8 @@ public class RegisterController {
     private UserService userService;
 
     @PostMapping
-    public void registerUser(@Valid @RequestBody RegisterForm registerForm){
-        userService.registerUser(registerForm);
+    public UserResponse registerUser(@Valid @RequestBody RegisterForm registerForm){
+        return userService.registerUser(registerForm);
     }
 
 }

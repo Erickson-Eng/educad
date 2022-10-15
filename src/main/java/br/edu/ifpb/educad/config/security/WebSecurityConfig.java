@@ -34,7 +34,12 @@ public class WebSecurityConfig {
     }
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/h2-console/**"
+            "/h2-console/**",
+            "/api/v1/register",
+            "/api/v1/teacher",
+            "/api/v1/teacher/**",
+            "/api/v1/student",
+            "/api/v1/student/**"
     };
 
     @Bean

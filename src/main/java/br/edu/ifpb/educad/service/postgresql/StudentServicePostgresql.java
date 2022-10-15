@@ -22,16 +22,21 @@ public class StudentServicePostgresql implements StudentService {
     private StudentRepository studentRepository;
     private StudentMapper studentMapper;
 
+    @Override
+    public List<StudentResponse> list() {
+        List<Student> students = studentRepository.findAll();
+        return students.stream().map(student -> studentMapper.entityToStudentResponse(student)).collect(Collectors.toList());
+    }
 
     @Override
     public StudentResponse save(StudentRequest studentRequest) {
-        Student student = getStudent(studentRequest);
-        try{
+        Student student = studentMapper.studentRequestToEntity(studentRequest);
+        try {
             studentRepository.save(student);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e){
             throw new DataIntegrityViolationException(e.getMessage());
         }
-        return getStudentResponse(student);
+        return studentMapper.entityToStudentResponse(student);
     }
 
     @Override
@@ -39,20 +44,20 @@ public class StudentServicePostgresql implements StudentService {
         Student student = verifyIfExist(id);
         updateData(student, studentRequest);
         studentRepository.save(student);
-        return getStudentResponse(student);
+        return studentMapper.entityToStudentResponse(student);
     }
 
     @Override
     public StudentResponse delete(Long id) {
         Student student = verifyIfExist(id);
         studentRepository.delete(student);
-        return getStudentResponse(student);
+        return studentMapper.entityToStudentResponse(student);
     }
 
     @Override
     public StudentResponse getStudentById(Long id) {
         Student student = verifyIfExist(id);
-        return getStudentResponse(student);
+        return studentMapper.entityToStudentResponse(student);
     }
 
     @Override
@@ -67,8 +72,10 @@ public class StudentServicePostgresql implements StudentService {
     }
 
     protected List<Student> verifyIfExist(String fullName){
-        return studentRepository.findAllByFullNameContainingIgnoreCase(fullName)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
+        // return studentRepository.findAllByFullNameContainingIgnoreCase(fullName)
+        //         .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
+
+        return null;
     }
 
     protected void updateData(Student student, StudentRequest request){
@@ -84,11 +91,4 @@ public class StudentServicePostgresql implements StudentService {
                 .collect(Collectors.toList());
     }
 
-    protected Student getStudent(StudentRequest studentRequest){
-        return studentMapper.studentRequestToEntity(studentRequest);
-    }
-
-    protected StudentResponse getStudentResponse(Student student){
-        return studentMapper.entityToStudentResponse(student);
-    }
 }

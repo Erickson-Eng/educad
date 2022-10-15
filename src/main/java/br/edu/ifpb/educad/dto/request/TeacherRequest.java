@@ -18,15 +18,17 @@ public class TeacherRequest{
     private String fullName;
 
     private LocalDate birthDate;
+
     @NotBlank
-    @CPF
+    @CPF(message = "CPF inválido")
     private String cpf;
+
     @NotNull
     private Long userId;
 
-
     @NotNull
     private AddressRequest addressRequest;
+
     private String value;
 
 }
