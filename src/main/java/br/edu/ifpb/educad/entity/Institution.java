@@ -3,6 +3,7 @@ package br.edu.ifpb.educad.entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "institution")
+@EntityListeners(AuditingEntityListener.class)
 public class Institution implements Serializable {
     private static final long serialVersionUID = -207392191958171304L;
 

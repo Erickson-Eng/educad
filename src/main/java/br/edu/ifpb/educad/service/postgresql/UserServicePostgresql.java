@@ -9,6 +9,7 @@ import br.edu.ifpb.educad.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,13 +21,27 @@ public class UserServicePostgresql implements UserService {
     @Override
     public UserResponse registerUser(RegisterForm registerForm) {
         User user = userMapper.userRequestToEntity(registerForm);
-
         try {
-            userRepository.save(user);
+            if (!verifyIfExist(registerForm.getUsername())){
+                user = userRepository.save(builderUser(user));
+            }
+
         } catch (RuntimeException e) {
             throw new DataIntegrityViolationException(e.getMessage());
         }
 
         return userMapper.entityToUserResponse(user);
+    }
+
+    protected User builderUser(User user){
+        return User.builder()
+                .email(user.getEmail())
+                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
+                .username(user.getUsername())
+                .cellphone(user.getCellphone())
+                .build();
+    }
+    protected boolean verifyIfExist(String usernameOrEmail){
+        return  userRepository.findUserByUsername(usernameOrEmail).isPresent();
     }
 }

@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,10 +18,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-
 @Configuration
-@EnableMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
+
 
     private final Environment environment;
     private final TokenService tokenService;
@@ -35,29 +34,33 @@ public class WebSecurityConfig {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/h2-console/**",
+            "/swagger-ui/**",
+            "/api/v1/auth",
             "/api/v1/register",
-            "/api/v1/teacher",
-            "/api/v1/teacher/**",
-            "/api/v1/student",
-            "/api/v1/student/**"
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
     };
 
     @Bean
-    protected SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         if (Arrays.asList(environment.getActiveProfiles()).contains("test")){
-            security.headers().frameOptions().disable();
+            httpSecurity.headers().frameOptions().disable();
         }
-        security
-                .csrf().disable().authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
+        httpSecurity
+                .httpBasic()
+                .and()
+                .authorizeHttpRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .addFilter(new JWTValidationFilter(authenticationManager(new AuthenticationConfiguration()), tokenService))
+                .and().cors().and()
+                .csrf().disable()
+                .addFilter(new JWTValidateFilter(authenticationManager(new AuthenticationConfiguration()), tokenService))
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(new AuthenticationConfiguration()), tokenService))
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        return security.build();
+        return httpSecurity.build();
     }
 
     @Bean
@@ -76,6 +79,18 @@ public class WebSecurityConfig {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.addAllowedOriginPattern("*");
+        corsConfiguration.addAllowedHeader("Authorization");
+        corsConfiguration.addAllowedHeader("Content-Type");
+        corsConfiguration.addAllowedHeader("Accept");
+        corsConfiguration.addAllowedMethod("POST");
+        corsConfiguration.addAllowedMethod("GET");
+        corsConfiguration.addAllowedMethod("DELETE");
+        corsConfiguration.addAllowedMethod("PUT");
+        corsConfiguration.addAllowedMethod("OPTIONS");
+        corsConfiguration.setMaxAge(3600L);
+        corsConfiguration.addAllowedOrigin("http://localhost:3000");
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
