@@ -1,10 +1,8 @@
 package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.config.security.TokenService;
-import br.edu.ifpb.educad.config.security.UserSecurity;
 import br.edu.ifpb.educad.dto.request.LoginForm;
 import br.edu.ifpb.educad.dto.response.TokenResponse;
-import br.edu.ifpb.educad.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

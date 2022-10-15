@@ -1,5 +1,6 @@
 package br.edu.ifpb.educad.config.security;
 
+import br.edu.ifpb.educad.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,8 +16,11 @@ import java.io.IOException;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private final AuthenticationManager authenticationManager;
+
     private final TokenService tokenService;
+
+    private final AuthenticationManager authenticationManager;
+
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, TokenService tokenService) {
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
@@ -24,17 +28,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
-                                                HttpServletResponse response)
-            throws AuthenticationException {
+                                                HttpServletResponse response) throws AuthenticationException {
         try {
-            UserSecurity user = new ObjectMapper().readValue(request.getInputStream(), UserSecurity.class);
+            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     user.getUsername(),
                     user.getPassword(),
                     user.getAuthorities()
             ));
         } catch (IOException e) {
-            throw new RuntimeException("Falha ao autenticar", e); // criar exception personalizada
+            throw new RuntimeException("Falha ao autenticar", e);
         }
     }
 
@@ -43,6 +46,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
+
         String token = tokenService.generateToken(authResult);
         response.getWriter().write(token);
         response.getWriter().flush();

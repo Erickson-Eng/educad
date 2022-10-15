@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JWTValidationFilter extends BasicAuthenticationFilter {
+public class JWTValidateFilter extends BasicAuthenticationFilter {
 
     private static final String HEADER_ATT = "Authorization";
     private static final String PREFIX = "Bearer ";
-
     private final TokenService tokenService;
-    public JWTValidationFilter(AuthenticationManager authenticationManager, TokenService tokenService) {
+
+    public JWTValidateFilter(AuthenticationManager authenticationManager,  TokenService tokenService) {
         super(authenticationManager);
         this.tokenService = tokenService;
     }
@@ -26,6 +26,7 @@ public class JWTValidationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
+
         String attribute = request.getHeader(HEADER_ATT);
         if (attribute == null || !attribute.startsWith(PREFIX)){
             chain.doFilter(request, response);
@@ -37,4 +38,5 @@ public class JWTValidationFilter extends BasicAuthenticationFilter {
             chain.doFilter(request,response);
         }
     }
+
 }

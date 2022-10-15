@@ -7,12 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import javax.validation.constraints.NotNull;
+
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginForm {
 
+    @NotNull
     private String login;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
