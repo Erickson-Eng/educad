@@ -17,11 +17,11 @@ import java.time.LocalDate;
 @ToString
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "discipline")
-public class Discipline implements Serializable {
+@Table(name = "subject")
+public class Subject implements Serializable {
     private static final long serialVersionUID = -3776342300975109583L;
 
-    public Discipline(String name, String period, String registration, Teacher teacher) {
+    public Subject(String name, String period, String registration, Teacher teacher) {
         this.name = name;
         this.period = period;
         this.registration = registration;
@@ -31,8 +31,8 @@ public class Discipline implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discipline_seq")
-    @SequenceGenerator(name = "discipline_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subject_seq")
+    @SequenceGenerator(name = "subject_seq")
     @Column(name = "id", nullable = false)
     private Long id;
 

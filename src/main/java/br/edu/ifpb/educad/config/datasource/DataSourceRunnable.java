@@ -78,29 +78,29 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         Address ruaNascimento = new Address("Rua Nascimento", "Casa", "78945612", "Rio de Janeiro", "Rio de Janeiro", "123456987", LocalDate.now(), LocalDate.now());
 
-        Map<String, Discipline> disciplinesJoao = new HashMap<>();
+        Map<String, Subject> subjectsJoao = new HashMap<>();
 
-        Discipline calculo1Joao = new Discipline(
+        Subject calculo1Joao = new Subject(
                 "Cálculo 1",
                 "2",
                 "123456789",
                 null);
 
-        Discipline algebraJoao = new Discipline(
+        Subject algebraJoao = new Subject(
                 "Álgebra Linear",
                 "4",
                 "123678445",
                 null);
 
-        Discipline calculo2Joao = new Discipline(
+        Subject calculo2Joao = new Subject(
                 "Cálculo 2",
                 "3",
                 "98456123",
                 null);
 
-        disciplinesJoao.put("Cálculo 1", calculo1Joao);
-        disciplinesJoao.put("Álgebra", algebraJoao);
-        disciplinesJoao.put("Cálculo 2", calculo2Joao);
+        subjectsJoao.put("Cálculo 1", calculo1Joao);
+        subjectsJoao.put("Álgebra", algebraJoao);
+        subjectsJoao.put("Cálculo 2", calculo2Joao);
 
         Teacher teacherJoao = new Teacher(
                 "João Silva",
@@ -108,7 +108,7 @@ public class DataSourceRunnable implements CommandLineRunner {
                 "12862305432",
                 userJoao,
                 ruaNascimento,
-                disciplinesJoao);
+                subjectsJoao);
 
         teacherRepository.save(teacherJoao);
 
@@ -117,22 +117,22 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         Address ruaAurora = new Address("Rua da Aurora", "Casa", "9995554", "Recife", "Pernambuco", "456989999", LocalDate.now(), LocalDate.now());
 
-        Map<String, Discipline> disciplinesRenata = new HashMap<>();
+        Map<String, Subject> subjectsRenata = new HashMap<>();
 
-        Discipline algoritmoRenata = new Discipline(
+        Subject algoritmoRenata = new Subject(
                 "Algoritmos e Lógica de Programação",
                 "1",
                 "999999999",
                 null);
 
-        Discipline atalRenata = new Discipline(
+        Subject atalRenata = new Subject(
                 "Análise e Técnias de Algoritmos",
                 "7",
                 "32122112",
                 null);
 
-        disciplinesRenata.put("Algoritmos", algoritmoRenata);
-        disciplinesRenata.put("ATAL", atalRenata);
+        subjectsRenata.put("Algoritmos", algoritmoRenata);
+        subjectsRenata.put("ATAL", atalRenata);
 
         Teacher teacherRenata = new Teacher(
                 "Renata Costa",
@@ -140,7 +140,7 @@ public class DataSourceRunnable implements CommandLineRunner {
                 "12862305432",
                 userRenata,
                 ruaAurora,
-                disciplinesRenata);
+                subjectsRenata);
 
         teacherRepository.save(teacherRenata);
 
@@ -149,21 +149,21 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         Address ruaPeixoto = new Address("Rua Peixoto", "Apto", "78788754", "Rio de Janeiro", "Amazônio", "1116699", LocalDate.now(), LocalDate.now());
 
-        Map<String, Discipline> disciplinePedro = new HashMap<>();
+        Map<String, Subject> disciplinePedro = new HashMap<>();
 
-        Discipline empreendedorismoPedro = new Discipline(
+        Subject empreendedorismoPedro = new Subject(
                 "Empreendedorismo",
                 "10",
                 "33557744",
                 null);
 
-        Discipline diversidadePedro = new Discipline(
+        Subject diversidadePedro = new Subject(
                 "Educação em Diversidade",
                 "4",
                 "32548721",
                 null);
 
-        Discipline direitosPedro = new Discipline(
+        Subject direitosPedro = new Subject(
                 "Direito dos Manos",
                 "6",
                 "789844444",
