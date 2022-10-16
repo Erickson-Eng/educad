@@ -22,6 +22,6 @@ public class SubjectRequest {
     private String registration;
 
     @NotNull
-    private TeacherRequest teacherRequest;
+    private Long teacherId;
 
 }

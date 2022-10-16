@@ -11,9 +11,9 @@ public interface SubjectMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
     @Mapping(target = "modifiedDate", ignore = true)
-    @Mapping(source = "teacherRequest", target = "teacher")
+    @Mapping(source = "teacherId", target = "teacher.id")
     Subject subjectRequestToEntity(SubjectRequest subjectRequest);
 
-    @Mapping(source = "teacher", target = "teacherResponse")
+    @Mapping(source = "teacher.id", target = "teacherId")
     SubjectResponse entityToSubjectResponse(Subject subject);
 }

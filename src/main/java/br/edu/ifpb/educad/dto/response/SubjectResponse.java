@@ -14,6 +14,6 @@ public class SubjectResponse {
     private String name;
     private String period;
     private String registration;
-    private TeacherResponse teacherResponse;
+    private Long teacherId;
 
 }
