@@ -21,6 +21,7 @@ public class StudentServicePostgresql implements StudentService {
 
     private StudentRepository studentRepository;
     private StudentMapper studentMapper;
+    private AddressServicePostgresql addressServicePostgresql;
 
     @Override
     public List<StudentResponse> list() {
@@ -42,8 +43,14 @@ public class StudentServicePostgresql implements StudentService {
     @Override
     public StudentResponse update(Long id, StudentRequest studentRequest) {
         Student student = verifyIfExist(id);
+
+        Long addressId = student.getAddress().getId();
+
         updateData(student, studentRequest);
+        addressServicePostgresql.update(addressId, studentRequest.getAddressRequest());
+
         studentRepository.save(student);
+
         return studentMapper.entityToStudentResponse(student);
     }
 
@@ -72,10 +79,8 @@ public class StudentServicePostgresql implements StudentService {
     }
 
     protected List<Student> verifyIfExist(String fullName){
-        // return studentRepository.findAllByFullNameContainingIgnoreCase(fullName)
-        //         .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
-
-        return null;
+        return studentRepository.findAllByFullNameContainingIgnoreCase(fullName)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
     }
 
     protected void updateData(Student student, StudentRequest request){

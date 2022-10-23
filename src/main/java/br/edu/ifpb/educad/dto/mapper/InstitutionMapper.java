@@ -11,7 +11,9 @@ public interface InstitutionMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
     @Mapping(target = "modifiedDate", ignore = true)
+    @Mapping(source = "addressRequest", target = "address")
     Institution institutionRequestToEntity(InstitutionRequest institutionRequest);
 
+    @Mapping(source = "address", target = "addressResponse")
     InstitutionResponse entityToInstitutionResponse(Institution institution);
 }

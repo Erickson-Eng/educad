@@ -11,12 +11,11 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherResponse {
-    private String fullName;
-    private LocalDate birthDate;
-    private String cpf;
+public class CourseResponse {
+
+    private String name;
+    private String institutionName;
     private LocalDate createdDate;
     private LocalDate modifiedDate;
-    private Long userId;
-    private AddressResponse addressResponse;
+
 }

@@ -22,10 +22,10 @@ public class Teacher extends Profile {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     @MapKey(name = "registration")
     @ToString.Exclude
-    private Map<String, Discipline> disciplineMap;
+    private Map<String, Subject> subjectMap;
 
-    public Teacher(String fullName, LocalDate birthDate, String cpf, User user, Address address, Map<String, Discipline> disciplineMap) {
+    public Teacher(String fullName, LocalDate birthDate, String cpf, User user, Address address, Map<String, Subject> subjectMap) {
         super(fullName, birthDate, cpf, user, address);
-        this.disciplineMap = disciplineMap;
+        this.subjectMap = subjectMap;
     }
 }

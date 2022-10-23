@@ -21,6 +21,7 @@ public class TeacherServicePostgresql implements TeacherService {
     private TeacherRepository teacherRepository;
 
     private TeacherMapper teacherMapper;
+    private AddressServicePostgresql addressServicePostgresql;
 
     @Override
     public List<TeacherResponse> list() {
@@ -42,8 +43,14 @@ public class TeacherServicePostgresql implements TeacherService {
     @Override
     public TeacherResponse update(Long id, TeacherRequest teacherRequest) {
         Teacher teacher = verifyIfExists(id);
+
+        Long addressId = teacher.getAddress().getId();
+
         updateData(teacher, teacherRequest);
+        addressServicePostgresql.update(addressId, teacherRequest.getAddressRequest());
+
         teacherRepository.save(teacher);
+
         return teacherMapper.entityToTeacherResponse(teacher);
     }
 
@@ -56,16 +63,33 @@ public class TeacherServicePostgresql implements TeacherService {
 
     @Override
     public TeacherResponse getTeacherById(Long id) {
-        return null;
+        Teacher teacher = verifyIfExists(id);
+        return teacherMapper.entityToTeacherResponse(teacher);
+    }
+
+    @Override
+    public List<TeacherResponse> getTeacherByName(String name) {
+        List<Teacher> teachers = verifyIfExists(name);
+
+        return listTeacherToResponse(teachers);
     }
 
     protected Teacher verifyIfExists(Long id) {
         return teacherRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("ID: %s || Não foi encontrado nenhuma entidade para o id fornecido", id)));
     }
 
+    protected List<Teacher> verifyIfExists(String fullName) {
+        return teacherRepository.findAllByFullNameContainingIgnoreCase(fullName)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
+    }
+
     protected void updateData(Teacher teacher, TeacherRequest teacherRequest) {
         teacher.setFullName(teacherRequest.getFullName());
         teacher.setBirthDate(teacherRequest.getBirthDate());
         teacher.setCpf(teacherRequest.getCpf());
+    }
+
+    protected List<TeacherResponse> listTeacherToResponse(List<Teacher> teachers) {
+        return teachers.stream().map(teacherMapper::entityToTeacherResponse).collect(Collectors.toList());
     }
 }

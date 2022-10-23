@@ -3,6 +3,7 @@ package br.edu.ifpb.educad.entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "address")
 public class Address implements Serializable {
     private static final long serialVersionUID = 247703941687283315L;
@@ -42,7 +44,7 @@ public class Address implements Serializable {
     private String state;
     private String zipCode;
 
-    @Column(name = "created_date", updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private LocalDate createdDate;
 

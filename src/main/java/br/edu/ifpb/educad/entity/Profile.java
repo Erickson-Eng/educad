@@ -3,6 +3,7 @@ package br.edu.ifpb.educad.entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Profile implements Serializable {
     private static final long serialVersionUID = -4995864704146338137L;
@@ -44,7 +46,7 @@ public abstract class Profile implements Serializable {
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.PERSIST})
     private Address address;
 
-    @Column(name = "created_date", updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private LocalDate createdDate;
 

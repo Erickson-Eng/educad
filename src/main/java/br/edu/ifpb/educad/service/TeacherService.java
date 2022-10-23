@@ -16,5 +16,6 @@ public interface TeacherService {
 
     TeacherResponse getTeacherById(Long id);
 
-    // getTeacherByName
+    List<TeacherResponse> getTeacherByName(String name);
+
 }

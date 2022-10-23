@@ -3,6 +3,7 @@ package br.edu.ifpb.educad.entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "institution")
 public class Institution implements Serializable {
     private static final long serialVersionUID = -207392191958171304L;
@@ -42,7 +44,7 @@ public class Institution implements Serializable {
     @JoinColumn(name = "institution_id", referencedColumnName = "id")
     private Set<Course> courses;
 
-    @Column(name = "created_date", updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private LocalDate createdDate;
 

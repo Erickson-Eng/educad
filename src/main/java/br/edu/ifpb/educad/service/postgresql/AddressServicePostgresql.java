@@ -65,7 +65,9 @@ public class AddressServicePostgresql implements AddressService {
     protected void updateData(Address address, AddressRequest addressRequest){
         address.setStreet(addressRequest.getStreet());
         address.setComplement(addressRequest.getComplement());
+        address.setNumber(addressRequest.getNumber());
         address.setCity(addressRequest.getCity());
+        address.setState(addressRequest.getState());
         address.setZipCode(addressRequest.getZipCode());
     }
 }

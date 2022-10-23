@@ -3,6 +3,7 @@ package br.edu.ifpb.educad.entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,11 +16,12 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Entity
-@Table(name = "discipline")
-public class Discipline implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "subject")
+public class Subject implements Serializable {
     private static final long serialVersionUID = -3776342300975109583L;
 
-    public Discipline(String name, String period, String registration, Teacher teacher) {
+    public Subject(String name, String period, String registration, Teacher teacher) {
         this.name = name;
         this.period = period;
         this.registration = registration;
@@ -29,8 +31,8 @@ public class Discipline implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discipline_seq")
-    @SequenceGenerator(name = "discipline_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subject_seq")
+    @SequenceGenerator(name = "subject_seq")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -43,7 +45,7 @@ public class Discipline implements Serializable {
     @ManyToOne(cascade = {CascadeType.REFRESH})
     private Teacher teacher;
 
-    @Column(name = "created_date", updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private LocalDate createdDate;
 
