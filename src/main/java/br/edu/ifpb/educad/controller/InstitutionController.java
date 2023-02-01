@@ -1,6 +1,7 @@
 package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.dto.request.InstitutionRequest;
+import br.edu.ifpb.educad.dto.response.CourseResponse;
 import br.edu.ifpb.educad.dto.response.InstitutionResponse;
 import br.edu.ifpb.educad.dto.response.table.InstitutionResponseTable;
 import br.edu.ifpb.educad.service.InstitutionService;
@@ -14,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/institution")
@@ -75,5 +77,15 @@ public class InstitutionController {
         institutionResponseTable.setInstitutionResponseList(institutionService.getInstitutionByName(name));
 
         return institutionResponseTable;
+    }
+
+    @ApiOperation(value = "Get all courses from an institution")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "ok", response = InstitutionResponse.class)
+    })
+    @GetMapping("/{id}/courses")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CourseResponse> getCoursesByInstitution(@PathVariable Long id) {
+        return institutionService.getCoursesByInstitution(id);
     }
 }

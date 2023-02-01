@@ -2,9 +2,9 @@ package br.edu.ifpb.educad.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,8 +26,19 @@ public class Student extends Profile {
     }
 
     private String matriculation;
+
     private String course;
+
     private String period;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_class",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "class_id")
+    )
+    private Set<Class> classes;
+
     private LocalDate entryDate;
 
 }

@@ -5,10 +5,14 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 
 @Builder
 @AllArgsConstructor
@@ -17,9 +21,9 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Table(name = "users")
-public class User implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public class User implements Serializable, UserDetails {
     private static final long serialVersionUID = 3954873306310267070L;
 
     public User(String username, String password, String email, String cellphone) {
@@ -48,7 +52,7 @@ public class User implements Serializable {
 
     private String cellphone;
 
-    @Column(name = "created_date", nullable = false, updatable = false)
+    @Column(name = "created_date", updatable = false)
     @CreatedDate
     private LocalDate createdDate;
 
@@ -56,4 +60,28 @@ public class User implements Serializable {
     @LastModifiedDate
     private LocalDate modifiedDate;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

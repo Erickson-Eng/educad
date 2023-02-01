@@ -13,6 +13,6 @@ public class TokenResponse {
 
     private String token;
     private String authenticateType;
-
+    private UserResponse user;
 
 }

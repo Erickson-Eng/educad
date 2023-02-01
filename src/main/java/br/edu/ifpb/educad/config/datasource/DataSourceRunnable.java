@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -36,7 +37,7 @@ public class DataSourceRunnable implements CommandLineRunner {
     }
 
     private void seedStudent() {
-        User userMaria = new User("maria_alves", "789poi", "maria_alves@gmail.com", "87911118225");
+        User userMaria = new User("maria_alves", new BCryptPasswordEncoder().encode("789poi"), "maria_alves@gmail.com", "87911118225");
         userRepository.save(userMaria);
 
         Address avenidaDutra = new Address("Avenida Dutra", "Apto", "456", "Recife", "Pernambuco", "458889999", LocalDate.now(), LocalDate.now());
@@ -53,7 +54,7 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         studentRepository.save(studentMaria);
 
-        User userCarlos = new User("carlos_peixoto", "asdf456", "carlos_peixoto@gmail.com", "87912228225");
+        User userCarlos = new User("carlos_peixoto", new BCryptPasswordEncoder().encode("asdf456"), "carlos_peixoto@gmail.com", "87912228225");
         userRepository.save(userCarlos);
 
         Address ruaCoqueiros = new Address("Rua dos Coqueiros", "Apto", "65", "João Pessoa", "Praíba", "458669999", LocalDate.now(), LocalDate.now());
@@ -73,7 +74,7 @@ public class DataSourceRunnable implements CommandLineRunner {
 
     private void seedTeacher() {
 
-        User userJoao = new User("joao_silva", "123abc", "joao@gmail.com", "87991178225");
+        User userJoao = new User("joao_silva", new BCryptPasswordEncoder().encode("123abc"), "joao@gmail.com", "87991178225");
         userRepository.save(userJoao);
 
         Address ruaNascimento = new Address("Rua Nascimento", "Casa", "78945612", "Rio de Janeiro", "Rio de Janeiro", "123456987", LocalDate.now(), LocalDate.now());
@@ -112,7 +113,7 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         teacherRepository.save(teacherJoao);
 
-        User userRenata = new User("renata_costa", "321asdf", "renata_costa@gmail.com", "87999978225");
+        User userRenata = new User("renata_costa", new BCryptPasswordEncoder().encode("321asdf"), "renata_costa@gmail.com", "87999978225");
         userRepository.save(userRenata);
 
         Address ruaAurora = new Address("Rua da Aurora", "Casa", "9995554", "Recife", "Pernambuco", "456989999", LocalDate.now(), LocalDate.now());
@@ -144,7 +145,7 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         teacherRepository.save(teacherRenata);
 
-        User userPedro = new User("pedro_goncalves", "asdfqwerasdf", "pedro_goncalves@gmail.com", "87991148790");
+        User userPedro = new User("pedro_goncalves", new BCryptPasswordEncoder().encode("asdfqwerasdf"), "pedro_goncalves@gmail.com", "87991148790");
         userRepository.save(userPedro);
 
         Address ruaPeixoto = new Address("Rua Peixoto", "Apto", "78788754", "Rio de Janeiro", "Amazônio", "1116699", LocalDate.now(), LocalDate.now());

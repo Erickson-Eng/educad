@@ -1,6 +1,7 @@
 package br.edu.ifpb.educad.service;
 
 import br.edu.ifpb.educad.dto.request.TeacherRequest;
+import br.edu.ifpb.educad.dto.response.SubjectResponse;
 import br.edu.ifpb.educad.dto.response.TeacherResponse;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface TeacherService {
     TeacherResponse getTeacherById(Long id);
 
     List<TeacherResponse> getTeacherByName(String name);
+
+    List<SubjectResponse> getSubjectsByTeacher(Long id);
 
 }

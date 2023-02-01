@@ -18,22 +18,24 @@ import java.util.Set;
 @ToString
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "subject")
-public class Subject implements Serializable {
-    private static final long serialVersionUID = -3776342300975109583L;
+@Table(name = "class")
+public class Class implements Serializable {
 
-    public Subject(String name, String period, String registration, Teacher teacher) {
+    private static final long serialVersionUID = -8392072614106928893L;
+
+    public Class(String name, String period, Teacher teacher, Subject subject, Set<Student> students, LocalDate createdDate, LocalDate modifiedDate) {
         this.name = name;
         this.period = period;
-        this.registration = registration;
         this.teacher = teacher;
-        this.createdDate = LocalDate.now();
-        this.modifiedDate = LocalDate.now();
+        this.subject = subject;
+        this.students = students;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subject_seq")
-    @SequenceGenerator(name = "subject_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "class_gen")
+    @SequenceGenerator(name = "class_gen")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -41,14 +43,14 @@ public class Subject implements Serializable {
 
     private String period;
 
-    private String registration;
-
     @ManyToOne(cascade = {CascadeType.REFRESH})
     private Teacher teacher;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "subject_id", referencedColumnName = "id")
-    private Set<Class> classes;
+    @ManyToOne(cascade = {CascadeType.REFRESH})
+    private Subject subject;
+
+    @ManyToMany(mappedBy = "classes")
+    private Set<Student> students;
 
     @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
@@ -57,5 +59,9 @@ public class Subject implements Serializable {
     @Column(name = "modified_date")
     @LastModifiedDate
     private LocalDate modifiedDate;
+
+    public Long getId() {
+        return id;
+    }
 
 }

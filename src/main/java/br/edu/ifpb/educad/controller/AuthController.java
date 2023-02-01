@@ -1,9 +1,10 @@
 package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.config.security.TokenService;
-import br.edu.ifpb.educad.config.security.UserSecurity;
+import br.edu.ifpb.educad.dto.mapper.UserMapper;
 import br.edu.ifpb.educad.dto.request.LoginForm;
 import br.edu.ifpb.educad.dto.response.TokenResponse;
+import br.edu.ifpb.educad.dto.response.UserResponse;
 import br.edu.ifpb.educad.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class AuthController {
 
     private AuthenticationManager authenticationManager;
     private TokenService tokenService;
+    private UserMapper userMapper;
 
     @PostMapping
     public ResponseEntity<TokenResponse> auth(@RequestBody @Valid LoginForm loginForm){
@@ -35,7 +37,10 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(login);
             String token = tokenService.generateToken(authentication);
 
-            return ResponseEntity.ok().body(new TokenResponse(token, "Bearer"));
+            User user = (User) authentication.getPrincipal();
+            UserResponse userResponse = userMapper.entityToUserResponse(user);
+
+            return ResponseEntity.ok().body(new TokenResponse(token, "Bearer", userResponse));
         } catch (AuthenticationException e){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

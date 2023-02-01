@@ -1,8 +1,11 @@
 package br.edu.ifpb.educad.service.postgresql;
 
+import br.edu.ifpb.educad.dto.mapper.SubjectMapper;
 import br.edu.ifpb.educad.dto.mapper.TeacherMapper;
 import br.edu.ifpb.educad.dto.request.TeacherRequest;
+import br.edu.ifpb.educad.dto.response.SubjectResponse;
 import br.edu.ifpb.educad.dto.response.TeacherResponse;
+import br.edu.ifpb.educad.entity.Subject;
 import br.edu.ifpb.educad.entity.Teacher;
 import br.edu.ifpb.educad.repository.TeacherRepository;
 import br.edu.ifpb.educad.service.TeacherService;
@@ -12,8 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -22,6 +29,7 @@ public class TeacherServicePostgresql implements TeacherService {
 
     private TeacherMapper teacherMapper;
     private AddressServicePostgresql addressServicePostgresql;
+    private SubjectMapper subjectMapper;
 
     @Override
     public List<TeacherResponse> list() {
@@ -75,12 +83,12 @@ public class TeacherServicePostgresql implements TeacherService {
     }
 
     protected Teacher verifyIfExists(Long id) {
-        return teacherRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("ID: %s || Não foi encontrado nenhuma entidade para o id fornecido", id)));
+        return teacherRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("ID: %s || Não foi encontrado nenhum professor para o id fornecido", id)));
     }
 
     protected List<Teacher> verifyIfExists(String fullName) {
         return teacherRepository.findAllByFullNameContainingIgnoreCase(fullName)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum estudante para o nome informado", fullName)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Name: %s || Não foi encontrado nenhum professor para o nome informado", fullName)));
     }
 
     protected void updateData(Teacher teacher, TeacherRequest teacherRequest) {
@@ -91,5 +99,11 @@ public class TeacherServicePostgresql implements TeacherService {
 
     protected List<TeacherResponse> listTeacherToResponse(List<Teacher> teachers) {
         return teachers.stream().map(teacherMapper::entityToTeacherResponse).collect(Collectors.toList());
+    }
+
+    public List<SubjectResponse> getSubjectsByTeacher(Long id) {
+        Teacher teacher = this.verifyIfExists(id);
+        Optional<List<Subject>> optionalSubjects = teacherRepository.getSubjectByTeacher(teacher.getId());
+        return optionalSubjects.orElse(Collections.emptyList()).stream().map(subjectMapper::entityToSubjectResponse).collect(Collectors.toList());
     }
 }

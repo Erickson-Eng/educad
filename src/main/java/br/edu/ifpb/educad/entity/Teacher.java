@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Set;
 
 // A anotação @Builder causa erro com o MapStruct
 //@Builder
@@ -28,4 +29,8 @@ public class Teacher extends Profile {
         super(fullName, birthDate, cpf, user, address);
         this.subjectMap = subjectMap;
     }
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    private Set<Class> classes;
 }
