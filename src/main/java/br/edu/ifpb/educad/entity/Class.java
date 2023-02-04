@@ -23,14 +23,12 @@ public class Class implements Serializable {
 
     private static final long serialVersionUID = -8392072614106928893L;
 
-    public Class(String name,
+    public Class(String subject,
                  String period,
                  Teacher teacher,
-                 String subject,
                  Set<Student> students,
                  LocalDate createdDate,
                  LocalDate modifiedDate) {
-        this.name = name;
         this.period = period;
         this.teacher = teacher;
         this.subject = subject;
@@ -45,14 +43,12 @@ public class Class implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String name;
+    private String subject;
 
     private String period;
 
     @ManyToOne(cascade = {CascadeType.REFRESH})
     private Teacher teacher;
-
-    private String subject;
 
     @ManyToMany(mappedBy = "classes")
     private Set<Student> students;

@@ -1,6 +1,7 @@
 package br.edu.ifpb.educad.config.datasource;
 
 import br.edu.ifpb.educad.entity.*;
+import br.edu.ifpb.educad.entity.Class;
 import br.edu.ifpb.educad.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,12 +28,16 @@ public class DataSourceRunnable implements CommandLineRunner {
     @Autowired
     private InstitutionRepository institutionRepository;
 
+    @Autowired
+    private ClassRepository classRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
         this.seedInstitution();
         this.seedTeacher();
         this.seedStudent();
+        this.seedClass();
 
     }
 
@@ -216,5 +221,34 @@ public class DataSourceRunnable implements CommandLineRunner {
         Institution uepb = new Institution("UEPB", avenidaPeixoto, coursesUepb);
 
         institutionRepository.saveAll(Arrays.asList(ifpb, ufcg, uninassau, uepb));
+    }
+
+    private void seedClass() {
+        User userJoaoSoares = new User("joao_silva_soares",
+                new BCryptPasswordEncoder().encode("123abcd"),
+                "joao_soares@gmail.com", "87998878225");
+        userRepository.save(userJoaoSoares);
+
+        Address ruaNascimentoCosta = new Address("Rua Nascimento da Costa",
+                "Casa",
+                "78949912",
+                "Recife",
+                "Pernambuco",
+                "123776987",
+                LocalDate.now(),
+                LocalDate.now());
+
+        Teacher teacherJoaoSoares = new Teacher(
+                "João Silva",
+                LocalDate.of(1990, 1, 1),
+                "12862305432",
+                userJoaoSoares,
+                ruaNascimentoCosta);
+
+        teacherRepository.save(teacherJoaoSoares);
+
+        Class class1 = new Class("Álgebra Linear", "8", teacherJoaoSoares, new HashSet<Student>(), LocalDate.now(), LocalDate.now());
+
+        classRepository.save(class1);
     }
 }
