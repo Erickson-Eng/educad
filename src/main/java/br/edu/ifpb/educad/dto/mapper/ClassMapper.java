@@ -12,11 +12,11 @@ public interface ClassMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
     @Mapping(target = "modifiedDate", ignore = true)
-    @Mapping(source = "subjectId", target = "subject.id")
+    @Mapping(source = "subject", target = "subject")
     @Mapping(source = "teacherId", target = "teacher.id")
     Class classRequestToEntity(ClassRequest classRequest);
 
-    @Mapping(source = "subject.id", target = "subjectId")
+    @Mapping(source = "subject", target = "subject")
     @Mapping(source = "teacher.id", target = "teacherId")
     ClassResponse entityToClassResponse(Class classEntity);
 

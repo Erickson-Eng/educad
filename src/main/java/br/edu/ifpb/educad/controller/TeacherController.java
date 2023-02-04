@@ -1,7 +1,6 @@
 package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.dto.request.TeacherRequest;
-import br.edu.ifpb.educad.dto.response.SubjectResponse;
 import br.edu.ifpb.educad.dto.response.TeacherResponse;
 import br.edu.ifpb.educad.dto.response.table.TeacherResponseTable;
 import br.edu.ifpb.educad.service.TeacherService;
@@ -90,7 +89,7 @@ public class TeacherController {
     })
     @GetMapping("/{id}/subjects")
     @ResponseStatus(HttpStatus.OK)
-    public List<SubjectResponse> getSubjectsByTeacher(@PathVariable Long id) {
+    public List<String> getSubjectsByTeacher(@PathVariable Long id) {
         return teacherService.getSubjectsByTeacher(id);
     }
 }

@@ -79,37 +79,36 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         Address ruaNascimento = new Address("Rua Nascimento", "Casa", "78945612", "Rio de Janeiro", "Rio de Janeiro", "123456987", LocalDate.now(), LocalDate.now());
 
-        Map<String, Subject> subjectsJoao = new HashMap<>();
-
-        Subject calculo1Joao = new Subject(
-                "Cálculo 1",
-                "2",
-                "123456789",
-                null);
-
-        Subject algebraJoao = new Subject(
-                "Álgebra Linear",
-                "4",
-                "123678445",
-                null);
-
-        Subject calculo2Joao = new Subject(
-                "Cálculo 2",
-                "3",
-                "98456123",
-                null);
-
-        subjectsJoao.put("Cálculo 1", calculo1Joao);
-        subjectsJoao.put("Álgebra", algebraJoao);
-        subjectsJoao.put("Cálculo 2", calculo2Joao);
+//        Map<String, Subject> subjectsJoao = new HashMap<>();
+//
+//        Subject calculo1Joao = new Subject(
+//                "Cálculo 1",
+//                "2",
+//                "123456789",
+//                null);
+//
+//        Subject algebraJoao = new Subject(
+//                "Álgebra Linear",
+//                "4",
+//                "123678445",
+//                null);
+//
+//        Subject calculo2Joao = new Subject(
+//                "Cálculo 2",
+//                "3",
+//                "98456123",
+//                null);
+//
+//        subjectsJoao.put("Cálculo 1", calculo1Joao);
+//        subjectsJoao.put("Álgebra", algebraJoao);
+//        subjectsJoao.put("Cálculo 2", calculo2Joao);
 
         Teacher teacherJoao = new Teacher(
                 "João Silva",
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
                 userJoao,
-                ruaNascimento,
-                subjectsJoao);
+                ruaNascimento);
 
         teacherRepository.save(teacherJoao);
 
@@ -118,30 +117,29 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         Address ruaAurora = new Address("Rua da Aurora", "Casa", "9995554", "Recife", "Pernambuco", "456989999", LocalDate.now(), LocalDate.now());
 
-        Map<String, Subject> subjectsRenata = new HashMap<>();
-
-        Subject algoritmoRenata = new Subject(
-                "Algoritmos e Lógica de Programação",
-                "1",
-                "999999999",
-                null);
-
-        Subject atalRenata = new Subject(
-                "Análise e Técnias de Algoritmos",
-                "7",
-                "32122112",
-                null);
-
-        subjectsRenata.put("Algoritmos", algoritmoRenata);
-        subjectsRenata.put("ATAL", atalRenata);
+//        Map<String, Subject> subjectsRenata = new HashMap<>();
+//
+//        Subject algoritmoRenata = new Subject(
+//                "Algoritmos e Lógica de Programação",
+//                "1",
+//                "999999999",
+//                null);
+//
+//        Subject atalRenata = new Subject(
+//                "Análise e Técnias de Algoritmos",
+//                "7",
+//                "32122112",
+//                null);
+//
+//        subjectsRenata.put("Algoritmos", algoritmoRenata);
+//        subjectsRenata.put("ATAL", atalRenata);
 
         Teacher teacherRenata = new Teacher(
                 "Renata Costa",
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
                 userRenata,
-                ruaAurora,
-                subjectsRenata);
+                ruaAurora);
 
         teacherRepository.save(teacherRenata);
 
@@ -150,37 +148,36 @@ public class DataSourceRunnable implements CommandLineRunner {
 
         Address ruaPeixoto = new Address("Rua Peixoto", "Apto", "78788754", "Rio de Janeiro", "Amazônio", "1116699", LocalDate.now(), LocalDate.now());
 
-        Map<String, Subject> disciplinePedro = new HashMap<>();
-
-        Subject empreendedorismoPedro = new Subject(
-                "Empreendedorismo",
-                "10",
-                "33557744",
-                null);
-
-        Subject diversidadePedro = new Subject(
-                "Educação em Diversidade",
-                "4",
-                "32548721",
-                null);
-
-        Subject direitosPedro = new Subject(
-                "Direito dos Manos",
-                "6",
-                "789844444",
-                null);
-
-        disciplinePedro.put("Empreededorismo", empreendedorismoPedro);
-        disciplinePedro.put("Diversidade", diversidadePedro);
-        disciplinePedro.put("Direitos dos Manos", direitosPedro);
+//        Map<String, Subject> disciplinePedro = new HashMap<>();
+//
+//        Subject empreendedorismoPedro = new Subject(
+//                "Empreendedorismo",
+//                "10",
+//                "33557744",
+//                null);
+//
+//        Subject diversidadePedro = new Subject(
+//                "Educação em Diversidade",
+//                "4",
+//                "32548721",
+//                null);
+//
+//        Subject direitosPedro = new Subject(
+//                "Direito dos Manos",
+//                "6",
+//                "789844444",
+//                null);
+//
+//        disciplinePedro.put("Empreededorismo", empreendedorismoPedro);
+//        disciplinePedro.put("Diversidade", diversidadePedro);
+//        disciplinePedro.put("Direitos dos Manos", direitosPedro);
 
         Teacher teacherPedro = new Teacher(
                 "Pedro Gonçalves",
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
                 userPedro,
-                ruaPeixoto,
-                disciplinePedro);
+                ruaPeixoto);
 
         teacherRepository.save(teacherPedro);
     }

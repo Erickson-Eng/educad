@@ -18,7 +18,6 @@ public class ClassServicePostgreSQL implements ClassService {
 
     private ClassRepository classRepository;
     private ClassMapper classMapper;
-    private SubjectServicePostgreSQL subjectServicePostgreSQL;
     private TeacherServicePostgresql teacherServicePostgresql;
 
     @Override
@@ -68,17 +67,17 @@ public class ClassServicePostgreSQL implements ClassService {
     }
 
     protected void updateData(Class aClass, ClassRequest classRequest) {
-        aClass.setName(classRequest.getName());
-        aClass.setPeriod(classRequest.getPeriod());
-        aClass.setSubject(
-                subjectServicePostgreSQL.verifyIfExists(
-                        classRequest.getSubjectId()
-                )
-        );
-        aClass.setTeacher(
-                teacherServicePostgresql.verifyIfExists(
-                        classRequest.getTeacherId()
-                )
-        );
+//        aClass.setName(classRequest.getName());
+//        aClass.setPeriod(classRequest.getPeriod());
+//        aClass.setSubject(
+//                subjectServicePostgreSQL.verifyIfExists(
+//                        classRequest.getSubjectId()
+//                )
+//        );
+//        aClass.setTeacher(
+//                teacherServicePostgresql.verifyIfExists(
+//                        classRequest.getTeacherId()
+//                )
+//        );
     }
 }

@@ -2,9 +2,7 @@ package br.edu.ifpb.educad.service.postgresql;
 
 import br.edu.ifpb.educad.dto.mapper.TeacherMapper;
 import br.edu.ifpb.educad.dto.request.TeacherRequest;
-import br.edu.ifpb.educad.dto.response.SubjectResponse;
 import br.edu.ifpb.educad.dto.response.TeacherResponse;
-import br.edu.ifpb.educad.entity.Subject;
 import br.edu.ifpb.educad.entity.Teacher;
 import br.edu.ifpb.educad.repository.TeacherRepository;
 import br.edu.ifpb.educad.service.TeacherService;
@@ -14,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -98,7 +94,7 @@ public class TeacherServicePostgresql implements TeacherService {
     }
 
 //    Consertar posteriormente
-    public List<SubjectResponse> getSubjectsByTeacher(Long id) {
+    public List<String> getSubjectsByTeacher(Long id) {
         return null;
     }
 }

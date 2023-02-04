@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,15 +20,12 @@ import java.util.Set;
 public class Teacher extends Profile {
     private static final long serialVersionUID = 5112183181912923264L;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
-    @MapKey(name = "registration")
-    @ToString.Exclude
-    private Map<String, Subject> subjectMap;
-
-    public Teacher(String fullName, LocalDate birthDate, String cpf, User user, Address address, Map<String, Subject> subjectMap) {
+    public Teacher(String fullName,
+                   LocalDate birthDate,
+                   String cpf,
+                   User user,
+                   Address address) {
         super(fullName, birthDate, cpf, user, address);
-        this.subjectMap = subjectMap;
     }
 
     @OneToMany(cascade = CascadeType.PERSIST)

@@ -19,7 +19,7 @@ public class ClassRequest {
     private String period;
 
     @NotNull
-    private Long subjectId;
+    private String subject;
 
     @NotNull
     private Long teacherId;

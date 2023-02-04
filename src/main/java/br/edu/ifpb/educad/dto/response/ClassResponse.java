@@ -15,7 +15,7 @@ public class ClassResponse {
 
     private String name;
     private String period;
-    private Long subjectId;
+    private String subject;
     private Long teacherId;
     private LocalDate createdDate;
     private LocalDate modifiedDate;
