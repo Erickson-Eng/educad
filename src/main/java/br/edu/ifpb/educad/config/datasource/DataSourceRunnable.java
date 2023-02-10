@@ -1,6 +1,7 @@
 package br.edu.ifpb.educad.config.datasource;
 
 import br.edu.ifpb.educad.entity.*;
+import br.edu.ifpb.educad.entity.Class;
 import br.edu.ifpb.educad.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,186 +28,335 @@ public class DataSourceRunnable implements CommandLineRunner {
     @Autowired
     private InstitutionRepository institutionRepository;
 
+    @Autowired
+    private SubjectRepository subjectRepository;
+
+    @Autowired
+    private ClassRepository classRepository;
+
+    private Class class1;
+    private Class class2;
+    private Class class3;
+
     @Override
     public void run(String... args) throws Exception {
 
+        this.seedClass();
         this.seedInstitution();
         this.seedTeacher();
         this.seedStudent();
 
     }
 
+    private void seedClass() {
+        this.class1 = new Class(
+                "Turma 1",
+                "2023.1",
+                null,
+                null,
+                new HashSet<>(),
+                LocalDate.now(),
+                LocalDate.now()
+        );
+
+        this.class2 = new Class(
+                "Turma 2",
+                "2023.1",
+                null,
+                null,
+                new HashSet<>(),
+                LocalDate.now(),
+                LocalDate.now()
+        );
+
+        this.class3 = new Class(
+                "Turma 3",
+                "2023.1",
+                null,
+                null,
+                new HashSet<>(),
+                LocalDate.now(),
+                LocalDate.now()
+        );
+    }
+
     private void seedStudent() {
-        User userMaria = new User("maria_alves", new BCryptPasswordEncoder().encode("789poi"), "maria_alves@gmail.com", "87911118225");
-        userRepository.save(userMaria);
+        User user1 = new User(
+                "maria_alves",
+                new BCryptPasswordEncoder().encode("senha123"),
+                "maria_alves@gmail.com",
+                "87911118225"
+        );
 
-        Address avenidaDutra = new Address("Avenida Dutra", "Apto", "456", "Recife", "Pernambuco", "458889999", LocalDate.now(), LocalDate.now());
+        userRepository.save(user1);
 
-        Student studentMaria = new Student("Maria Alves",
+        Address address1 = new Address(
+                "Avenida Dutra",
+                "Apto",
+                "456",
+                "Recife",
+                "Pernambuco",
+                "45888999",
+                LocalDate.now(),
+                LocalDate.now()
+        );
+
+        Student student1 = new Student(
+                "Maria Alves",
                 LocalDate.of(1990, 1, 1),
                 "12863305432",
-                userMaria,
-                avenidaDutra,
+                user1,
+                address1,
                 "123456789",
                 "Administração",
                 "8",
-                LocalDate.now());
+                LocalDate.now()
+        );
 
-        studentRepository.save(studentMaria);
+        studentRepository.save(student1);
 
-        User userCarlos = new User("carlos_peixoto", new BCryptPasswordEncoder().encode("asdf456"), "carlos_peixoto@gmail.com", "87912228225");
-        userRepository.save(userCarlos);
+        User user2 = new User(
+                "carlos_peixoto",
+                new BCryptPasswordEncoder().encode("qwerty123"),
+                "carlos_peixoto@gmail.com",
+                "87912228225"
+        );
 
-        Address ruaCoqueiros = new Address("Rua dos Coqueiros", "Apto", "65", "João Pessoa", "Praíba", "458669999", LocalDate.now(), LocalDate.now());
+        userRepository.save(user2);
 
-        Student studentCarlos = new Student("Carlos Peixoto",
+        Address address2 = new Address(
+                "Rua dos Coqueiros",
+                "Apto",
+                "65",
+                "João Pessoa",
+                "Paraíba",
+                "45866999",
+                LocalDate.now(),
+                LocalDate.now()
+        );
+
+        Student student2 = new Student(
+                "Carlos Peixoto",
                 LocalDate.of(1990, 1, 1),
                 "92863305222",
-                userCarlos,
-                ruaCoqueiros,
+                user2,
+                address2,
                 "9955111454",
                 "Engenharia Civil",
                 "5",
-                LocalDate.now());
+                LocalDate.now()
+        );
 
-        studentRepository.save(studentCarlos);
+        studentRepository.save(student2);
     }
 
     private void seedTeacher() {
 
-        User userJoao = new User("joao_silva", new BCryptPasswordEncoder().encode("123abc"), "joao@gmail.com", "87991178225");
-        userRepository.save(userJoao);
+        User user1 = new User(
+                "joao_silva",
+                new BCryptPasswordEncoder().encode("123abc"),
+                "joao_silva@gmail.com",
+                "87991178225"
+        );
 
-        Address ruaNascimento = new Address("Rua Nascimento", "Casa", "78945612", "Rio de Janeiro", "Rio de Janeiro", "123456987", LocalDate.now(), LocalDate.now());
+        userRepository.save(user1);
 
-        Map<String, Subject> subjectsJoao = new HashMap<>();
+        Address address1 = new Address(
+                "Rua Nascimento",
+                "Casa",
+                "78945612",
+                "Rio de Janeiro",
+                "Rio de Janeiro",
+                "123456987",
+                LocalDate.now(),
+                LocalDate.now()
+        );
 
-        Subject calculo1Joao = new Subject(
-                "Cálculo 1",
-                "2",
-                "123456789");
+        Subject subject1 = new Subject("Cálculo 1", "2", "123456789");
 
-        Subject algebraJoao = new Subject(
-                "Álgebra Linear",
-                "4",
-                "123678445");
+        Subject subject2 = new Subject("Álgebra Linear", "4", "123678445");
 
-        Subject calculo2Joao = new Subject(
-                "Cálculo 2",
-                "3",
-                "98456123");
+        Subject subject3 = new Subject("Cálculo 2", "3", "98456123");
 
-        subjectsJoao.put("Cálculo 1", calculo1Joao);
-        subjectsJoao.put("Álgebra", algebraJoao);
-        subjectsJoao.put("Cálculo 2", calculo2Joao);
+        subjectRepository.saveAll(Arrays.asList(subject1, subject2, subject3));
 
-        Teacher teacherJoao = new Teacher(
+        Teacher teacher1 = new Teacher(
                 "João Silva",
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
-                userJoao,
-                ruaNascimento);
+                user1,
+                address1
+        );
 
-        teacherRepository.save(teacherJoao);
+        teacherRepository.save(teacher1);
 
-        User userRenata = new User("renata_costa", new BCryptPasswordEncoder().encode("321asdf"), "renata_costa@gmail.com", "87999978225");
-        userRepository.save(userRenata);
+        this.class1.setTeacher(teacher1);
+        this.class1.setSubject(subject1);
 
-        Address ruaAurora = new Address("Rua da Aurora", "Casa", "9995554", "Recife", "Pernambuco", "456989999", LocalDate.now(), LocalDate.now());
+        classRepository.save(this.class1);
 
-        Map<String, Subject> subjectsRenata = new HashMap<>();
+        User user2 = new User(
+                "renata_costa",
+                new BCryptPasswordEncoder().encode("senha321"),
+                "renata_costa@gmail.com",
+                "87999978225"
+        );
 
-        Subject algoritmoRenata = new Subject(
-                "Algoritmos e Lógica de Programação",
-                "1",
-                "999999999");
+        userRepository.save(user2);
 
-        Subject atalRenata = new Subject(
-                "Análise e Técnias de Algoritmos",
-                "7",
-                "32122112");
+        Address address2 = new Address(
+                "Rua da Aurora",
+                "Casa",
+                "9995554",
+                "Recife",
+                "Pernambuco",
+                "456989999",
+                LocalDate.now(),
+                LocalDate.now()
+        );
 
-        subjectsRenata.put("Algoritmos", algoritmoRenata);
-        subjectsRenata.put("ATAL", atalRenata);
+        Subject subject4 = new Subject("Algoritmos e Lógica de Programação", "1", "999999999");
 
-        Teacher teacherRenata = new Teacher(
+        Subject subject5 = new Subject("Análise e Técnicas de Algoritmos", "7", "32122112");
+
+        subjectRepository.saveAll(Arrays.asList(subject4, subject5));
+
+        Teacher teacher2 = new Teacher(
                 "Renata Costa",
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
-                userRenata,
-                ruaAurora);
+                user2,
+                address2
+        );
 
-        teacherRepository.save(teacherRenata);
+        teacherRepository.save(teacher2);
 
-        User userPedro = new User("pedro_goncalves", new BCryptPasswordEncoder().encode("asdfqwerasdf"), "pedro_goncalves@gmail.com", "87991148790");
-        userRepository.save(userPedro);
+        this.class2.setTeacher(teacher2);
+        this.class2.setSubject(subject4);
 
-        Address ruaPeixoto = new Address("Rua Peixoto", "Apto", "78788754", "Rio de Janeiro", "Amazônio", "1116699", LocalDate.now(), LocalDate.now());
+        classRepository.save(this.class2);
 
-        Map<String, Subject> disciplinePedro = new HashMap<>();
+        User user3 = new User(
+                "pedro_goncalves",
+                new BCryptPasswordEncoder().encode("qwerty321"),
+                "pedro_goncalves@gmail.com",
+                "87991148790"
+        );
 
-        Subject empreendedorismoPedro = new Subject(
-                "Empreendedorismo",
-                "10",
-                "33557744");
+        userRepository.save(user3);
 
-        Subject diversidadePedro = new Subject(
-                "Educação em Diversidade",
-                "4",
-                "32548721");
+        Address address3 = new Address(
+                "Rua Peixoto",
+                "Apto",
+                "78788754",
+                "Rio de Janeiro",
+                "Amazônio",
+                "1116699",
+                LocalDate.now(),
+                LocalDate.now()
+        );
 
-        Subject direitosPedro = new Subject(
-                "Direito dos Manos",
-                "6",
-                "789844444");
+        Subject subject6 = new Subject("Empreendedorismo", "10", "33557744");
 
-        disciplinePedro.put("Empreededorismo", empreendedorismoPedro);
-        disciplinePedro.put("Diversidade", diversidadePedro);
-        disciplinePedro.put("Direitos dos Manos", direitosPedro);
+        Subject subject7 = new Subject("Educação em Diversidade", "4", "32548721");
 
-        Teacher teacherPedro = new Teacher(
+        Subject subject8 = new Subject("Direitos Humanos", "6", "789844444");
+
+        subjectRepository.saveAll(Arrays.asList(subject6, subject7, subject8));
+
+        Teacher teacher3 = new Teacher(
                 "Pedro Gonçalves",
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
-                userPedro,
-                ruaPeixoto);
+                user3,
+                address3
+        );
 
-        teacherRepository.save(teacherPedro);
+        teacherRepository.save(teacher3);
+
+        this.class3.setTeacher(teacher3);
+        this.class3.setSubject(subject6);
+
+        classRepository.save(this.class3);
     }
 
     private void seedInstitution() {
-        Course administracaoIfpb = new Course("Administração", null, LocalDate.now(), LocalDate.now());
-        Course agroecologiaIfpb = new Course("Agroecologia", null, LocalDate.now(), LocalDate.now());
-        Course computacaoIfpb = new Course("Engenharia de Computação", null, LocalDate.now(), LocalDate.now());
-        HashSet<Course> coursesIfpb = new HashSet<>(Arrays.asList(administracaoIfpb, agroecologiaIfpb, computacaoIfpb));
+        Course course1 = new Course("Administração", null, LocalDate.now(), LocalDate.now());
+        Course course2 = new Course("Agroecologia", null, LocalDate.now(), LocalDate.now());
+        Course course3 = new Course("Engenharia de Computação", null, LocalDate.now(), LocalDate.now());
 
-        Address ruaTranquilino = new Address("R. Tranquilino Coelho Lemos", "Prédio", "91051209", "Campina Grande", "Paraíba", "40506090", LocalDate.now(), LocalDate.now());
-        Institution ifpb = new Institution("IFPB", ruaTranquilino, coursesIfpb);
+        HashSet<Course> courses1 = new HashSet<>(Arrays.asList(course1, course2, course3));
 
-        Course odontologia = new Course("Odontologia", null, LocalDate.now(), LocalDate.now());
-        Course nutricao = new Course("Nutrição", null, LocalDate.now(), LocalDate.now());
-        Course cienciaUfcg = new Course("Ciência da Computação", null, LocalDate.now(), LocalDate.now());
-        HashSet<Course> coursesUfcg = new HashSet<>(Arrays.asList(odontologia, nutricao, cienciaUfcg));
+        Address address1 = new Address(
+                "R. Tranquilino Coelho Lemos",
+                "Prédio",
+                "91051209",
+                "Campina Grande",
+                "Paraíba",
+                "40506090",
+                LocalDate.now(),
+                LocalDate.now()
+        );
 
-        Address ruaGoncalo = new Address("Rua Gonçalo de Carvalho", "Casa", "123456987", "Porto Alegre", "Rio Grande do Sul", "123753951", LocalDate.now(), LocalDate.now());
-        Institution ufcg = new Institution("UFCG", ruaGoncalo, coursesUfcg);
+        Institution IFPB = new Institution("IFPB", address1, courses1);
 
-        Course fisicaUninassau = new Course("Física", null, LocalDate.now(), LocalDate.now());
-        Course letrasUninassau = new Course("Letras", null, LocalDate.now(), LocalDate.now());
-        Course farmaciaUninassau = new Course("Farmácia", null, LocalDate.now(), LocalDate.now());
-        HashSet<Course> coursesUninassau = new HashSet<>(Arrays.asList(fisicaUninassau, letrasUninassau, farmaciaUninassau));
+        Course course4 = new Course("Odontologia", null, LocalDate.now(), LocalDate.now());
+        Course course5 = new Course("Nutrição", null, LocalDate.now(), LocalDate.now());
+        Course course6 = new Course("Ciência da Computação", null, LocalDate.now(), LocalDate.now());
 
-        Address ruaPedras = new Address("Rua das Pedras", "Apto", "369852147", "Búzios", "Rio de Janeiro", "789951741", LocalDate.now(), LocalDate.now());
-        Institution uninassau = new Institution("UNINASSAU", ruaPedras, coursesUninassau);
+        HashSet<Course> courses2 = new HashSet<>(Arrays.asList(course4, course5, course6));
 
-        Course contabeisUepb = new Course("Ciências Contábeis", null, LocalDate.now(), LocalDate.now());
-        Course civilUepb = new Course("Engenharia Civil", null, LocalDate.now(), LocalDate.now());
-        Course enfermagemUepb = new Course("Enfermagem", null, LocalDate.now(), LocalDate.now());
-        HashSet<Course> coursesUepb = new HashSet<>(Arrays.asList(contabeisUepb, civilUepb, enfermagemUepb));
+        Address address2 = new Address(
+                "Rua Gonçalo de Carvalho",
+                "Casa",
+                "123456987",
+                "Porto Alegre",
+                "Rio Grande do Sul",
+                "123753951",
+                LocalDate.now(),
+                LocalDate.now()
+        );
 
-        Address avenidaPeixoto = new Address("Av. Mal. Floriano Peixoto", "Prédio", "147852365", "Campina Grande", "Paríba", "123456965", LocalDate.now(), LocalDate.now());
-        Institution uepb = new Institution("UEPB", avenidaPeixoto, coursesUepb);
+        Institution UFCG = new Institution("UFCG", address2, courses2);
 
-        institutionRepository.saveAll(Arrays.asList(ifpb, ufcg, uninassau, uepb));
+        Course course7 = new Course("Física", null, LocalDate.now(), LocalDate.now());
+        Course course8 = new Course("Letras", null, LocalDate.now(), LocalDate.now());
+        Course course9 = new Course("Farmácia", null, LocalDate.now(), LocalDate.now());
+
+        HashSet<Course> courses3 = new HashSet<>(Arrays.asList(course7, course8, course9));
+
+        Address address3 = new Address(
+                "Rua das Pedras",
+                "Apto",
+                "369852147",
+                "Búzios",
+                "Rio de Janeiro",
+                "789951741",
+                LocalDate.now(),
+                LocalDate.now()
+        );
+
+        Institution UNINASSAU = new Institution("UNINASSAU", address3, courses3);
+
+        Course course10 = new Course("Ciências Contábeis", null, LocalDate.now(), LocalDate.now());
+        Course course11 = new Course("Engenharia Civil", null, LocalDate.now(), LocalDate.now());
+        Course course12 = new Course("Enfermagem", null, LocalDate.now(), LocalDate.now());
+
+        HashSet<Course> courses4 = new HashSet<>(Arrays.asList(course10, course11, course12));
+
+        Address address4 = new Address(
+                "Av. Mal. Floriano Peixoto",
+                "Prédio",
+                "147852365",
+                "Campina Grande",
+                "Paríba",
+                "123456965",
+                LocalDate.now(),
+                LocalDate.now()
+        );
+
+        Institution UEPB = new Institution("UEPB", address4, courses4);
+
+        institutionRepository.saveAll(Arrays.asList(IFPB, UFCG, UNINASSAU, UEPB));
     }
 }
