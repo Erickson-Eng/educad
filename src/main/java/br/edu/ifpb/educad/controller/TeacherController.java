@@ -1,7 +1,6 @@
 package br.edu.ifpb.educad.controller;
 
 import br.edu.ifpb.educad.dto.request.TeacherRequest;
-import br.edu.ifpb.educad.dto.response.SubjectResponse;
 import br.edu.ifpb.educad.dto.response.TeacherResponse;
 import br.edu.ifpb.educad.dto.response.table.TeacherResponseTable;
 import br.edu.ifpb.educad.service.TeacherService;
@@ -82,15 +81,5 @@ public class TeacherController {
         teacherResponseTable.setTeacherResponseList(teacherService.getTeacherByName(name));
 
         return teacherResponseTable;
-    }
-
-    @ApiOperation(value = "Get all subjects a teacher teaches")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "ok", response = TeacherResponse.class)
-    })
-    @GetMapping("/{id}/subjects")
-    @ResponseStatus(HttpStatus.OK)
-    public List<SubjectResponse> getSubjectsByTeacher(@PathVariable Long id) {
-        return teacherService.getSubjectsByTeacher(id);
     }
 }

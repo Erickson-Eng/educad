@@ -84,20 +84,17 @@ public class DataSourceRunnable implements CommandLineRunner {
         Subject calculo1Joao = new Subject(
                 "Cálculo 1",
                 "2",
-                "123456789",
-                null);
+                "123456789");
 
         Subject algebraJoao = new Subject(
                 "Álgebra Linear",
                 "4",
-                "123678445",
-                null);
+                "123678445");
 
         Subject calculo2Joao = new Subject(
                 "Cálculo 2",
                 "3",
-                "98456123",
-                null);
+                "98456123");
 
         subjectsJoao.put("Cálculo 1", calculo1Joao);
         subjectsJoao.put("Álgebra", algebraJoao);
@@ -108,8 +105,7 @@ public class DataSourceRunnable implements CommandLineRunner {
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
                 userJoao,
-                ruaNascimento,
-                subjectsJoao);
+                ruaNascimento);
 
         teacherRepository.save(teacherJoao);
 
@@ -123,14 +119,12 @@ public class DataSourceRunnable implements CommandLineRunner {
         Subject algoritmoRenata = new Subject(
                 "Algoritmos e Lógica de Programação",
                 "1",
-                "999999999",
-                null);
+                "999999999");
 
         Subject atalRenata = new Subject(
                 "Análise e Técnias de Algoritmos",
                 "7",
-                "32122112",
-                null);
+                "32122112");
 
         subjectsRenata.put("Algoritmos", algoritmoRenata);
         subjectsRenata.put("ATAL", atalRenata);
@@ -140,8 +134,7 @@ public class DataSourceRunnable implements CommandLineRunner {
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
                 userRenata,
-                ruaAurora,
-                subjectsRenata);
+                ruaAurora);
 
         teacherRepository.save(teacherRenata);
 
@@ -155,20 +148,17 @@ public class DataSourceRunnable implements CommandLineRunner {
         Subject empreendedorismoPedro = new Subject(
                 "Empreendedorismo",
                 "10",
-                "33557744",
-                null);
+                "33557744");
 
         Subject diversidadePedro = new Subject(
                 "Educação em Diversidade",
                 "4",
-                "32548721",
-                null);
+                "32548721");
 
         Subject direitosPedro = new Subject(
                 "Direito dos Manos",
                 "6",
-                "789844444",
-                null);
+                "789844444");
 
         disciplinePedro.put("Empreededorismo", empreendedorismoPedro);
         disciplinePedro.put("Diversidade", diversidadePedro);
@@ -179,8 +169,7 @@ public class DataSourceRunnable implements CommandLineRunner {
                 LocalDate.of(1990, 1, 1),
                 "12862305432",
                 userPedro,
-                ruaPeixoto,
-                disciplinePedro);
+                ruaPeixoto);
 
         teacherRepository.save(teacherPedro);
     }

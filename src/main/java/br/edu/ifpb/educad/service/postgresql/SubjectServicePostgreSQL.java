@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 public class SubjectServicePostgreSQL implements SubjectService {
     private SubjectRepository subjectRepository;
     private SubjectMapper subjectMapper;
-    private TeacherServicePostgresql teacherServicePostgresql;
 
     @Override
     public SubjectResponse save(SubjectRequest subjectRequest) {
@@ -69,10 +68,5 @@ public class SubjectServicePostgreSQL implements SubjectService {
         subject.setName(subjectRequest.getName());
         subject.setPeriod(subjectRequest.getPeriod());
         subject.setRegistration(subjectRequest.getRegistration());
-        subject.setTeacher(
-                teacherServicePostgresql.verifyIfExists(
-                        subjectRequest.getTeacherId()
-                )
-        );
     }
 }

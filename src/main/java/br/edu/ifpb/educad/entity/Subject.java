@@ -22,11 +22,10 @@ import java.util.Set;
 public class Subject implements Serializable {
     private static final long serialVersionUID = -3776342300975109583L;
 
-    public Subject(String name, String period, String registration, Teacher teacher) {
+    public Subject(String name, String period, String registration) {
         this.name = name;
         this.period = period;
         this.registration = registration;
-        this.teacher = teacher;
         this.createdDate = LocalDate.now();
         this.modifiedDate = LocalDate.now();
     }
@@ -42,9 +41,6 @@ public class Subject implements Serializable {
     private String period;
 
     private String registration;
-
-    @ManyToOne(cascade = {CascadeType.REFRESH})
-    private Teacher teacher;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
